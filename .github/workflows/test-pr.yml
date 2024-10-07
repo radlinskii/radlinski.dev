@@ -16,14 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: docker/build-push-action@v2
-        with:
-          context: ./infra
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
 
-      - name: CDK Synth
-        uses: scottbrenner/aws-cdk-action@v1.6.4
-        with:
-          args: synth
+      - name: CDK Synth in infra directory
+        working-directory: ./infra
+        run: cdk synth
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
