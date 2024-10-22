@@ -17,6 +17,10 @@ jobs:
         run: npm ci
       - name: Test formatting
         run: npm run lint:format
+      - name: Test style linting
+        run: npm run lint:style
+      - name: Test code linding
+        run: npm run lint:code
   test-infra:
     runs-on: ubuntu-latest
 
