@@ -1,0 +1,47 @@
+---
+import ThemeSelect from "./ThemeSelect.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<header>
+    <nav>
+        <h2><a href="/">{SITE_TITLE}</a></h2>
+        <ThemeSelect />
+    </nav>
+</header>
+
+<style>
+    header {
+        margin: 0;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: center;
+        background: var(--bg-color1);
+        color: var(--fg-color1);
+    }
+    nav {
+        width: 1024px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    h2 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    nav h2 a {
+        color: var(--fg-color1);
+        text-decoration: none;
+    }
+    nav h2 a:hover {
+        color: var(--accent2);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+        header {
+            padding: 0.5rem 1rem;
+        }
+    }
+</style>

@@ -1,0 +1,218 @@
+/*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg-color1-rgb: 29, 28, 24;
+    --bg-color1: rgb(var(--bg-color1-rgb));
+    --bg-color2-rgb: 50, 48, 42;
+    --bg-color2: rgb(var(--bg-color2-rgb));
+    --fg-color1-rgb: 245, 255, 250;
+    --fg-color1: rgb(var(--fg-color1-rgb));
+    --fg-color2-rgb: 221, 217, 205;
+    --fg-color2: rgb(var(--fg-color2-rgb));
+    --fg-color3-rgb: 166, 160, 131;
+    --fg-color3: rgb(var(--fg-color3-rgb));
+    --accent1: rgb(97, 155, 225);
+    --accent2: rgb(225, 155, 97);
+
+    --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
+        0 8px 24px rgba(var(--fg-color1-rgb), 33%),
+        0 16px 32px rgba(var(--fg-color1-rgb), 33%);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --bg-color1-rgb: 255, 255, 243;
+    --bg-color1: rgb(var(--bg-color1-rgb));
+    --bg-color2-rgb: 245, 240, 225;
+    --bg-color2: rgb(var(--bg-color2-rgb));
+    --fg-color1-rgb: 20, 20, 0;
+    --fg-color1: rgb(var(--fg-color1-rgb));
+    --fg-color2-rgb: 80, 80, 50;
+    --fg-color2: rgb(var(--fg-color2-rgb));
+    --fg-color3-rgb: 110, 110, 90;
+    --fg-color3: rgb(var(--fg-color3-rgb));
+    --accent1: rgb(47, 95, 145);
+    --accent2: rgb(225, 155, 97);
+
+    --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
+        0 8px 24px rgba(var(--fg-color1-rgb), 33%),
+        0 16px 32px rgba(var(--fg-color1-rgb), 33%);
+}
+
+@font-face {
+    font-family: "IosevkaTermNerdFontPropo";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"),
+        local("ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IosevkaTermNerdFontPropo";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf"), local("ttf");
+    font-display: swap;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: "IosevkaTermNerdFontPropo", monospace;
+    line-height: 1.4;
+}
+
+body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: var(--fg-color2);
+    background: var(--bg-color2);
+}
+
+main {
+    width: 720px;
+    max-width: calc(100% - 2rem);
+    margin: auto;
+    padding: 2rem 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    color: var(--fg-color1);
+}
+
+h1 {
+    font-size: 3.052rem;
+}
+
+h2 {
+    font-size: 2.441rem;
+}
+
+h3 {
+    font-size: 1.953rem;
+}
+
+h4 {
+    font-size: 1.563rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+strong,
+b {
+    font-weight: 700;
+}
+
+a {
+    color: var(--accent1);
+}
+
+a:hover {
+    color: var(--accent2);
+}
+
+p {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.prose p {
+    margin-bottom: 2rem;
+}
+
+textarea {
+    width: 100%;
+    font-size: 1rem;
+}
+
+input {
+    font-size: 1rem;
+}
+
+table {
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+code {
+    padding: 2px 5px;
+    background-color: var(--fg-color2);
+    border-radius: 2px;
+}
+
+pre {
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+pre > code {
+    all: unset;
+}
+
+blockquote {
+    border-left: 4px solid var(--accent1);
+    padding: 0 0 0 20px;
+    margin: 0px;
+    font-size: 1.333rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--fg-color2);
+}
+
+.sr-only {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+    clip: rect(1px 1px 1px 1px);
+    /* maybe deprecated but we need to support legacy browsers */
+    clip: rect(1px, 1px, 1px, 1px);
+    /* modern browsers, clip-path works inwards from each corner */
+    clip-path: inset(50%);
+    /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+    white-space: nowrap;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

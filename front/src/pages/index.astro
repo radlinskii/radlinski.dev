@@ -1,0 +1,46 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>&gt;hi</h1>
+            <p class="unselectable">+++</p>
+            <p>
+                name = Ignacy Radlinski<br />
+                position = Software Engineer @ u-blox<br />
+                github = <a href="https://github.com/radlinskii" target="_blank"
+                    >https://github.com/radlinskii</a
+                ><br />
+                linkedin = <a
+                    href="https://www.linkedin.com/in/ignacy-radlinski"
+                    target="_blank"
+                    >https://www.linkedin.com/in/ignacy-radlinski</a
+                >
+            </p>
+            <p class="unselectable">+++</p>
+            <p>
+                At some point, maybe I'll add something to
+                <a href="/posts" style="pointer-events: none">/posts</a><br />
+                ...something about ergonomic keyboards, configuring NeoVim,<br
+                />
+                other tools from my development environment,<br />
+                how I built this website and some of my other side projects,<br
+                />
+                programming in general, hiking in Switzerland,<br />
+                swimming, ornithology,<br />
+                or other things I'm interested in.<br />
+            </p>
+        </main>
+        <Footer />
+    </body>
+</html>

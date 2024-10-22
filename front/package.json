@@ -1,0 +1,27 @@
+{
+    "name": "",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "lint:format": "prettier --check .",
+        "lint:format:fix": "prettier --write .",
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro check && astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.9.4",
+        "@astrojs/mdx": "^3.1.8",
+        "@astrojs/rss": "^4.0.8",
+        "@astrojs/sitemap": "^3.2.0",
+        "astro": "^4.16.2",
+        "sass": "^1.79.5",
+        "typescript": "^5.6.3"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3",
+        "prettier-plugin-astro": "^0.14.1"
+    }
+}
