@@ -1,4 +1,6 @@
-# Welcome to radlinski.dev CDK Go project!
+# radlinski.dev infra
+
+This directory holds IaC part of [radlinski.dev](https://radlinski.dev) website setup.
 
 The `cdk.json` file tells the CDK toolkit how to execute your app.
 
