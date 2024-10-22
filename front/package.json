@@ -5,6 +5,8 @@
     "scripts": {
         "lint:format": "prettier --check .",
         "lint:format:fix": "prettier --write .",
+        "lint:style": "stylelint '**/*.{scss,astro}'",
+        "lint:style:fix": "stylelint --fix '**/*.{scss,astro}'",
         "dev": "astro dev",
         "start": "astro dev",
         "build": "astro check && astro build",
@@ -21,7 +23,12 @@
         "typescript": "^5.6.3"
     },
     "devDependencies": {
+        "postcss-html": "^1.7.0",
         "prettier": "^3.3.3",
-        "prettier-plugin-astro": "^0.14.1"
+        "prettier-plugin-astro": "^0.14.1",
+        "stylelint": "^16.10.0",
+        "stylelint-config-html": "^1.1.0",
+        "stylelint-config-standard": "^36.0.1",
+        "stylelint-config-standard-scss": "^13.1.0"
     }
 }

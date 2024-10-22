@@ -17,9 +17,8 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 166, 160, 131;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(97, 155, 225);
-    --accent2: rgb(225, 155, 97);
-
+    --accent1: rgb(97 155 225);
+    --accent2: rgb(225 155 97);
     --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
         0 8px 24px rgba(var(--fg-color1-rgb), 33%),
         0 16px 32px rgba(var(--fg-color1-rgb), 33%);
@@ -38,16 +37,15 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 110, 110, 90;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(47, 95, 145);
-    --accent2: rgb(225, 155, 97);
-
+    --accent1: rgb(47 95 145);
+    --accent2: rgb(225 155 97);
     --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
         0 8px 24px rgba(var(--fg-color1-rgb), 33%),
         0 16px 32px rgba(var(--fg-color1-rgb), 33%);
 }
 
 @font-face {
-    font-family: "IosevkaTermNerdFontPropo";
+    font-family: IosevkaTermNerdFontPropo;
     font-style: normal;
     font-weight: 400;
     src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"),
@@ -56,7 +54,7 @@
 }
 
 @font-face {
-    font-family: "IosevkaTermNerdFontPropo";
+    font-family: IosevkaTermNerdFontPropo;
     font-style: normal;
     font-weight: 700;
     src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf"), local("ttf");
@@ -69,7 +67,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 20px;
-    font-family: "IosevkaTermNerdFontPropo", monospace;
+    font-family: IosevkaTermNerdFontPropo, monospace;
     line-height: 1.4;
 }
 
@@ -97,7 +95,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem;
     line-height: 1.2;
     color: var(--fg-color1);
 }
@@ -181,7 +179,7 @@ pre > code {
 blockquote {
     border-left: 4px solid var(--accent1);
     padding: 0 0 0 20px;
-    margin: 0px;
+    margin: 0;
     font-size: 1.333rem;
 }
 
@@ -198,21 +196,21 @@ hr {
     height: 1px;
     width: 1px;
     overflow: hidden;
+
     /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
     clip: rect(1px 1px 1px 1px);
+
     /* maybe deprecated but we need to support legacy browsers */
     clip: rect(1px, 1px, 1px, 1px);
+
     /* modern browsers, clip-path works inwards from each corner */
     clip-path: inset(50%);
+
     /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
     white-space: nowrap;
 }
 
 .unselectable {
     -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }

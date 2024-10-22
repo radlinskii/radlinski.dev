@@ -2,7 +2,7 @@
 
 ---
 
-<div id="themeSelect">
+<div id="theme-select">
     <label>
         <svg
             id="system-mode-icon"
@@ -50,7 +50,11 @@
                 d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 1.5a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm12-7a.8.8 0 0 1-.8.8h-2.4a.8.8 0 0 1 0-1.6h2.4a.8.8 0 0 1 .8.8zM4 12a.8.8 0 0 1-.8.8H.8a.8.8 0 0 1 0-1.6h2.5a.8.8 0 0 1 .8.8zm16.5-8.5a.8.8 0 0 1 0 1l-1.8 1.8a.8.8 0 0 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM6.3 17.7a.8.8 0 0 1 0 1l-1.7 1.8a.8.8 0 1 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM12 0a.8.8 0 0 1 .8.8v2.5a.8.8 0 0 1-1.6 0V.8A.8.8 0 0 1 12 0zm0 20a.8.8 0 0 1 .8.8v2.4a.8.8 0 0 1-1.6 0v-2.4a.8.8 0 0 1 .8-.8zM3.5 3.5a.8.8 0 0 1 1 0l1.8 1.8a.8.8 0 1 1-1 1L3.5 4.6a.8.8 0 0 1 0-1zm14.2 14.2a.8.8 0 0 1 1 0l1.8 1.7a.8.8 0 0 1-1 1l-1.8-1.7a.8.8 0 0 1 0-1z"
             ></path>
         </svg>
-        <select value="system" id="themeSelectInput" aria-label="theme select">
+        <select
+            value="system"
+            id="theme-select-input"
+            aria-label="theme select"
+        >
             <option value="system">system</option>
             <option value="dark">dark</option>
             <option value="light">light</option>
@@ -68,22 +72,25 @@
         margin-right: 8px;
     }
 
-    #themeSelect {
+    #theme-select {
         border: 0;
         background: none;
     }
 
-    :global([data-theme="dark"]) .mode-icon path {
+    html[data-theme="dark"] .mode-icon path {
         fill: white;
     }
-    :global([data-theme="light"]) .theme-icon path {
+
+    html[data-theme="light"] .theme-icon path {
         fill: black;
     }
-    :global([data-theme="light"]) #system-moon {
+
+    html[data-theme="light"] #system-moon {
         stroke: black;
         fill: white;
     }
-    :global([data-theme="dark"]) #system-moon {
+
+    html[data-theme="dark"] #system-moon {
         stroke: white;
         fill: black;
     }
@@ -156,7 +163,7 @@
         handleSystemThemeChange,
     );
 
-    const themeSelectInput = document.getElementById("themeSelectInput");
+    const themeSelectInput = document.getElementById("theme-select-input");
 
     const handleThemeSelectInputChange = (event) => {
         if (isMode(event.target.value)) {
