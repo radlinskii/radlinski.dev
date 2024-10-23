@@ -24,6 +24,8 @@ jobs:
         run: npm run lint:style
       - name: Test code linding
         run: npm run lint:code
+      - name: Test Astro
+        run: npm run check
   test-infra:
     runs-on: ubuntu-latest
 
