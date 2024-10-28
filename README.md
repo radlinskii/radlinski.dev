@@ -49,7 +49,7 @@ to get more information on how to use astro.
 
 ## Deployment
 
-This website is automatically deployed on Cloudflare Pages whenever changes are pushed to the main branch.
+This website is automatically deployed on [Cloudflare Pages](https://pages.cloudflare.com) whenever changes are pushed to the main branch.
 
 ## Contributing
 
