@@ -51,7 +51,13 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
             </div>
             <div class="image-container">
                 <img
-                    src="/public/background_switzerland.jpeg"
+                    src="/background_switzerland_1200w.jpeg"
+                    srcset="
+                        /background_switzerland_400w.webp 400w,
+                        /background_switzerland_500w.webp 500w,
+                        /background_switzerland_720w.webp 720w
+                    "
+                    sizes="(min-width: 1280px) 498px, (min-width: 1024px) 400px, 720px"
                     alt="Ignacy Radliński hiking somewhere in Switzerland"
                 />
             </div>
@@ -90,7 +96,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
         }
 
         .image-container {
-            width: 498px;
+            width: 500px;
         }
     }
 </style>

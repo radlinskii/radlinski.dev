@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = "radlinski.dev";
 export const SITE_DESCRIPTION = "some links and stuff";
-export const SITE_IMAGE = "/background_switzerland.jpeg";
+export const SITE_IMAGE = "/background_switzerland_1200w.jpeg";
