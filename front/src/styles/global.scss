@@ -214,3 +214,9 @@ hr {
     -webkit-touch-callout: none;
     user-select: none;
 }
+
+@media screen and (width >= 1024px) {
+    .show-on-mobile {
+        display: none;
+    }
+}
