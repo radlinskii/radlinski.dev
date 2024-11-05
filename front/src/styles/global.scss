@@ -79,14 +79,18 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
     color: var(--fg-color2);
-    background: var(--bg-color2);
+    background: var(--bg-color1);
 }
 
 main {
-    width: 720px;
-    max-width: calc(100% - 2rem);
-    margin: auto;
-    padding: 2rem 1rem;
+    background: var(--bg-color2);
+}
+
+@media screen and (width>=1024px) {
+    main {
+        /* 100vh - header height - footer height */
+        min-height: calc(100vh - 68px - 81px);
+    }
 }
 
 h1,

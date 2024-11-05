@@ -17,49 +17,51 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
     <body>
         <Header />
         <main>
-            <div class="text-container">
-                <h1>&gt;hi</h1>
-                <p class="unselectable">+++</p>
-                <p>
-                    name = Ignacy Radlinski<br />
-                    position = Software Engineer @ u-blox<br />
-                    github = <a
-                        href="https://github.com/radlinskii"
-                        target="_blank">https://github.com/radlinskii</a
-                    ><br />
-                    linkedin = <a
-                        href="https://www.linkedin.com/in/ignacy-radlinski"
-                        target="_blank"
-                        >https://www.linkedin.com/in/ignacy-radlinski</a
-                    >
-                </p>
-                <p class="unselectable">+++</p>
-                <p>
-                    At some point, maybe I'll add something to
-                    <a href="/posts" style="pointer-events: none">/posts</a><br
-                    />
-                    ...something about ergonomic keyboards, configuring NeoVim,<br
-                    />
-                    other tools from my development environment,<br />
-                    how I built this website and some of my other side projects,<br
-                    />
-                    programming in general, hiking in Switzerland,<br />
-                    swimming, ornithology,<br />
-                    or other things I'm interested in.<br />
-                </p>
-                <p class="show-on-mobile unselectable">+++</p>
-            </div>
-            <div class="image-container">
-                <img
-                    src="/background_switzerland_1200w.jpeg"
-                    srcset="
+            <div class="main-container">
+                <div class="text-container">
+                    <h1>&gt;hi</h1>
+                    <p class="unselectable">+++</p>
+                    <p>
+                        name = Ignacy Radlinski<br />
+                        position = Software Engineer @ u-blox<br />
+                        github = <a
+                            href="https://github.com/radlinskii"
+                            target="_blank">https://github.com/radlinskii</a
+                        ><br />
+                        linkedin = <a
+                            href="https://www.linkedin.com/in/ignacy-radlinski"
+                            target="_blank"
+                            >https://www.linkedin.com/in/ignacy-radlinski</a
+                        >
+                    </p>
+                    <p class="unselectable">+++</p>
+                    <p>
+                        At some point, maybe I'll add something to
+                        <a href="/posts" style="pointer-events: none">/posts</a
+                        ><br />
+                        ...something about ergonomic keyboards, configuring NeoVim,<br
+                        />
+                        other tools from my development environment,<br />
+                        how I built this website and some of my other side projects,<br
+                        />
+                        programming in general, hiking in Switzerland,<br />
+                        swimming, ornithology,<br />
+                        or other things I'm interested in.<br />
+                    </p>
+                    <p class="show-on-mobile unselectable">+++</p>
+                </div>
+                <div class="image-container">
+                    <img
+                        src="/background_switzerland_1200w.jpeg"
+                        srcset="
                         /background_switzerland_400w.webp 400w,
                         /background_switzerland_500w.webp 500w,
                         /background_switzerland_720w.webp 720w
                     "
-                    sizes="(min-width: 1280px) 498px, (min-width: 1024px) 400px, 720px"
-                    alt="Ignacy Radliński hiking somewhere in Switzerland"
-                />
+                        sizes="(min-width: 1280px) 498px, (min-width: 1024px) 400px, 720px"
+                        alt="Ignacy Radliński hiking somewhere in Switzerland"
+                    />
+                </div>
             </div>
         </main>
         <Footer />
@@ -69,11 +71,18 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
 <style>
     .image-container {
         max-width: 720px;
-        padding-top: 16px;
+        padding-top: 8px;
     }
 
-    @media screen and (min-width: 1024px) {
-        main {
+    .main-container {
+        width: 720px;
+        max-width: calc(100% - 2rem);
+        margin: auto;
+        padding: 2rem 1rem;
+    }
+
+    @media screen and (width >= 1024px) {
+        .main-container {
             width: 1024px;
             display: flex;
             align-items: flex-end;
@@ -90,8 +99,8 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
         }
     }
 
-    @media screen and (min-width: 1280px) {
-        main {
+    @media screen and (width >= 1280px) {
+        .main-container {
             width: 1280px;
         }
 
