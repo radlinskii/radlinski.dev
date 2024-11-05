@@ -33,12 +33,11 @@ Start the development server:
 npm run dev
 ```
 
-The site should now be running locally at `http://localhost:3000`.
+The site should now be running locally at `http://localhost:4321`.
 
 ### Build framework
 
-This project is build with [astro](https://astro.build) as a *Static Site Generator*.\
-The app was created using astro's started kit.\
+This project is build with [astro](https://astro.build) as a *Static Site Generator* and was created using astro's started kit.\
 I've removed generated content and some of the features, like RSS feed generator, as it is not needed at the moment.
 
 There is also `npm run astro` script that is a proxy for `astro cli`, you can use it as follows:
