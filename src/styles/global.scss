@@ -88,8 +88,8 @@ main {
 
 @media screen and (width>=1024px) {
     main {
-        /* 100vh - header height - footer height */
-        min-height: calc(100vh - 68px - 81px);
+        /* 100vh - header height - footer height - some margin */
+        min-height: calc(100vh - 68px - 82px - 2px);
     }
 }
 
