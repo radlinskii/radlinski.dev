@@ -37,7 +37,9 @@ The site should now be running locally at `http://localhost:3000`.
 
 ### Build framework
 
-This project is build with [astro](https://astro.build) as a *Static Site Generator*.
+This project is build with [astro](https://astro.build) as a *Static Site Generator*.\
+The app was created using astro's started kit.\
+I've removed generated content and some of the features, like RSS feed generator, as it is not needed at the moment.
 
 There is also `npm run astro` script that is a proxy for `astro cli`, you can use it as follows:
 
@@ -53,7 +55,7 @@ This website is automatically deployed on [Cloudflare Pages](https://pages.cloud
 
 ## Contributing
 
-This is a personal project, so I'm not looking for contributions.
+This is a personal project, so I'm not actively looking for contributions.
 
 ## License
 

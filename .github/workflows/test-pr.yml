@@ -1,48 +1,25 @@
 name: Test Pull Request
 
 on:
-  pull_request:
-    branches:
-      - main
+    pull_request:
+        branches:
+            - main
 
 jobs:
-  test-front:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./front
+    test-build:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
-      - name: Test formatting
-        run: npm run lint:format
-      - name: Test style linting
-        run: npm run lint:style
-      - name: Test code linding
-        run: npm run lint:code
-      - name: Test Astro
-        run: npm run check
-  test-infra:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install AWS CDK
-        run: npm install -g aws-cdk
-
-      - name: CDK Synth in infra directory
-        working-directory: ./infra
-        run: cdk synth
-        env:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          STATIC_SITE_BUCKET: ${{ secrets.STATIC_SITE_BUCKET }}
-          REDIRECT_SITE_BUCKET: ${{ secrets.REDIRECT_SITE_BUCKET }}
+            - name: Install dependencies
+              run: npm ci
+            - name: Test formatting
+              run: npm run lint:format
+            - name: Test style linting
+              run: npm run lint:style
+            - name: Test code linding
+              run: npm run lint:code
+            - name: Test Astro
+              run: npm run check
