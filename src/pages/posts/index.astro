@@ -22,7 +22,14 @@ const posts = (await getCollection("posts")).sort(
         />
         <style>
             main {
-                width: 960px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                max-width: 980px;
+                padding: 2rem 1rem;
             }
 
             ul {

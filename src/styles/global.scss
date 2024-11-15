@@ -86,13 +86,6 @@ main {
     background: var(--bg-color2);
 }
 
-@media screen and (width>=1024px) {
-    main {
-        /* 100vh - header height - footer height - some margin */
-        min-height: calc(100vh - 68px - 82px - 2px);
-    }
-}
-
 h1,
 h2,
 h3,
