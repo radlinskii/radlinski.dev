@@ -29,7 +29,10 @@ const posts = (await getCollection("posts")).sort(
 
             section {
                 max-width: 980px;
-                padding: 2rem 1rem;
+                padding: 3rem 1rem;
+
+                /* 100vh - header height - footer height - padding - some margin */
+                min-height: calc(100vh - 68px - 82px - 6rem - 2px);
             }
 
             ul {

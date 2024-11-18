@@ -26,7 +26,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             }
 
             article {
-                padding: 2rem 1rem;
+                padding: 3rem 1rem;
+
+                /* 100vh - header height - footer height - padding - some margin */
+                min-height: calc(100vh - 68px - 82px - 6rem - 2px);
             }
 
             .hero-image {
