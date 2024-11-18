@@ -53,40 +53,38 @@ const {
             }
 
             .prose {
-                width: 980px;
-                max-width: calc(100% - 2rem);
-                margin: auto;
-                padding: 1rem;
                 color: var(--fg-color3);
+            }
+
+            @media screen and (width >= 1024px) {
+                .prose {
+                    margin: auto;
+                    width: 980px;
+                    max-width: calc(100% - 2rem);
+                }
+
+                h1 {
+                    font-size: 3.052rem;
+                }
             }
 
             .meta {
                 text-align: left;
-                line-height: 1.4;
             }
 
-            .title {
-                padding-top: 1rem;
-                text-align: center;
+            .meta-item {
                 line-height: 1;
-            }
-
-            .title h1 {
-                margin: 0 0 2rem;
-            }
-
-            .date {
                 margin-bottom: 0.5rem;
-                color: var(--fg-color2);
             }
 
-            .last-updated-on {
-                font-style: italic;
+            h1 {
+                margin: 0 0 2rem;
+                font-size: 2.441rem;
             }
 
             .content {
                 margin: 0 auto;
-                width: 720px;
+                max-width: 720px;
             }
 
             .divider {
@@ -112,23 +110,25 @@ const {
                     }
                 </div>
                 <div class="prose">
-                    <div class="title">
-                        <div class="meta">
-                            <Divider />
-                            published = <FormattedDate date={pubDate} /><br />
-                            {
-                                updatedDate && (
-                                    <div class="last-updated-on">
-                                        update_date=
-                                        <FormattedDate date={updatedDate} />
-                                    </div>
-                                )
-                            }
-                            tldr = {tldr}<br />
-                            <Divider />
+                    <div class="meta">
+                        <Divider />
+                        <div class="meta-item">
+                            published = <FormattedDate date={pubDate} />
                         </div>
-                        <h1><span class="unselectable">&gt;</span>{title}</h1>
+                        {
+                            updatedDate && (
+                                <div class="meta-item">
+                                    updated ={" "}
+                                    <FormattedDate date={updatedDate} />
+                                </div>
+                            )
+                        }
+                        <div class="meta-item">
+                            tldr = {tldr}
+                        </div>
+                        <Divider />
                     </div>
+                    <h1><span class="unselectable">&gt;</span>{title}</h1>
                     <div class="content">
                         <slot />
                     </div>
