@@ -6,7 +6,10 @@ import { SITE_NAME } from "../consts";
 <header>
     <nav>
         <h2><a href="/">{SITE_NAME}</a></h2>
-        <ThemeSelect />
+        <div class="nav-panel">
+            <a href="/posts"><span class="no-underline">/</span>posts</a>
+            <ThemeSelect />
+        </div>
     </nav>
 </header>
 
@@ -32,14 +35,23 @@ import { SITE_NAME } from "../consts";
         font-size: 1.2rem;
     }
 
-    nav h2 a {
+    nav a {
         color: var(--fg-color1);
         text-decoration: none;
     }
 
-    nav h2 a:hover {
+    nav a:hover {
         color: var(--accent2);
         text-decoration: underline;
+    }
+
+    .nav-panel {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .link-prefix {
+        margin-right: -2px;
     }
 
     @media (width < 1024px) {

@@ -21,13 +21,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         />
         <style>
             main {
-                width: calc(100% - 2rem);
                 max-width: 100%;
                 margin: 0;
             }
 
+            article {
+                padding: 2rem 1rem;
+            }
+
             .hero-image {
-                margin-top: 2rem;
                 width: 100%;
             }
 
@@ -39,7 +41,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             }
 
             .prose {
-                width: 720px;
+                width: 980px;
                 max-width: calc(100% - 2rem);
                 margin: auto;
                 padding: 1rem;
@@ -47,14 +49,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             }
 
             .title {
-                margin-bottom: 1rem;
-                padding: 1rem 0;
+                padding-top: 1rem;
                 text-align: center;
                 line-height: 1;
             }
 
             .title h1 {
-                margin: 0 0 0.5rem;
+                margin: 0 0 2rem;
             }
 
             .date {
@@ -64,6 +65,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
             .last-updated-on {
                 font-style: italic;
+            }
+
+            .content {
+                margin: 0 auto;
+                width: 720px;
+            }
+
+            .divider {
+                margin-bottom: 2rem;
             }
         </style>
     </head>
@@ -98,10 +108,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                             }
                         </div>
                         <h1>{title}</h1>
-                        <p>Happy reading</p>
-                        <hr />
                     </div>
-                    <slot />
+                    <div class="content">
+                        <hr class="divider" />
+                        <slot />
+                    </div>
                 </div>
             </article>
         </main>
