@@ -160,7 +160,7 @@ img {
 
 code {
     padding: 2px 5px;
-    background-color: var(--fg-color2);
+    background-color: var(--bg-color1);
     border-radius: 2px;
 }
 
@@ -209,6 +209,8 @@ hr {
 
 .unselectable {
     -webkit-touch-callout: none;
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-user-select: none;
     user-select: none;
 }
 
