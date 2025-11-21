@@ -73,13 +73,13 @@ const {
             }
 
             .meta-item {
-                line-height: 1;
+                line-height: 1.1;
                 margin-bottom: 0.5rem;
             }
 
             h1 {
-                margin: 0 0 2rem;
-                font-size: 2.441rem;
+                margin: 2rem 0;
+                font-size: 2.5rem;
             }
 
             .content {
@@ -111,25 +111,25 @@ const {
                 </div>
                 <div class="prose">
                     <div class="meta">
+                        <h1><span class="unselectable">&gt;</span>{title}</h1>
+                    </div>
+                    <div class="content">
                         <Divider />
                         <div class="meta-item">
-                            published = <FormattedDate date={pubDate} />
+                            <b>published</b> = <FormattedDate date={pubDate} />
                         </div>
                         {
                             updatedDate && (
                                 <div class="meta-item">
-                                    updated ={" "}
+                                    <b>updated</b> ={" "}
                                     <FormattedDate date={updatedDate} />
                                 </div>
                             )
                         }
                         <div class="meta-item">
-                            tldr = {tldr}
+                            <b>tldr</b> = {tldr}
                         </div>
                         <Divider />
-                    </div>
-                    <h1><span class="unselectable">&gt;</span>{title}</h1>
-                    <div class="content">
                         <slot />
                     </div>
                 </div>
