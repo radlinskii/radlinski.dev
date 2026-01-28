@@ -9,7 +9,6 @@ heroImageAlt: "My Iris keyboard with visible letter keys placed in the Colemak l
 ---
 
 
-
 ## Colemak keyboard layout
 
 Colemak is an improved version of the QWERTY keyboard layout.
@@ -36,14 +35,14 @@ Have you ever wondered why our keyboards look like they do?
 It all goes back to 19th century!
 When mechanical typewriters were invented in the 1870s, the metal arms (typebars) that struck the paper would often collide and stick if two neighboring letters were pressed quickly one after another. To reduce this, Christopher Sholes (the inventor of the typewriter) rearranged the keys to spread out commonly paired letters. That's how the now-familiar QWERTY pattern emerged.
 
-Once typewriters using QWERTY became commercially successful and schools started teaching it, the layout stuck—even long after jamming was no longer an issue. Today, in digital era, it's mainly inertia and standardization that keep QWERTY in place.
+Once typewriters using QWERTY became commercially successful and schools started teaching it, the layout stuck - even long after jamming was no longer an issue. Today, in digital era, it's mainly inertia and standardization that keep QWERTY in place.
 
 ## How exactly is Colemak better
 
 Colemak is designed to minimize unnecessary finger movement and make typing more comfortable compared to QWERTY (and also Dvorak in some areas).
 
-- **Home row focus:** The 10 most common letters sit on the home row. This means you spend far more time typing without leaving the most natural position—over **twice as much as in QWERTY**.
-- **Less finger travel:** Fingers move far less overall—about half the distance of QWERTY—which reduces strain and speeds up typing.
+- **Home row focus:** The 10 most common letters sit on the home row. This means you spend far more time typing without leaving the most natural position - over **twice as much as in QWERTY**.
+- **Less finger travel:** Fingers move far less overall - about half the distance of QWERTY - which reduces strain and speeds up typing.
 - **Fewer awkward motions:** Colemak avoids excessive row-jumping, same-finger typing, and pinky stretches that QWERTY often forces.
 - **Balanced load:** By grouping vowels on the right hand, it avoids long same-hand runs while keeping a good balance of hand usage, without overburdening weaker fingers.
 - **Practical efficiency:** Unlike Dvorak, which prioritizes hand alternation at the cost of other trade-offs, Colemak strikes a balance between comfort, speed, and ease of learning.

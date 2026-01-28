@@ -35,7 +35,7 @@ Some other keyboards have their own software that enables you to flash new firmw
 Some modifications can be done using software that you can install on your "host" machine, as opposed to flashing firmware on the keyboard itself.
 
 I've used [Karabiner Elements](https://karabiner-elements.pqrs.org) to enhance my MacBook's builtin keyboard.
-It's not as powerful a setup as my custom keyboards', but at least it solves my biggest issue with "normal" keyboards—the arrow keys.
+It's not as powerful a setup as my custom keyboards', but at least it solves my biggest issue with "normal" keyboards - the arrow keys.
 On my MacBook, when I hold `Caps Lock` key my `I`, `J`, `K`, and `L` keys become arrow keys.
 I've used Karabiner also to change the layout to "*Colemak Mod-DH*", as described in my other <a href="/posts/ergonomic-keyboard-layout">post about Colemak layout</a>.
 
@@ -71,7 +71,7 @@ When I hold a *layer key*, I enter a new layer, and when I release that key, I'm
 
 Layers work just like the `Shift` key.
 When you hold `Shift`, `a` becomes `A`, and `/` becomes `?`.
-In the same way, holding a layer key can transform the entire keyboard layout—from letters to collection of symbols, numbers, arrows, etc.
+In the same way, holding a layer key can transform the entire keyboard layout - from letters to collection of symbols, numbers, arrows, etc.
 
 I have two keys dedicated to switching to the most frequently visited layers under the resting positions of both of my thumbs.
 Which means that I don't need to move my hand at all to reach for example arrow keys.
@@ -144,7 +144,7 @@ It's not too pleasant to use as main way to navigate the cursor, but the scrolli
 
 To access this layer, the middle keys in both thumb clusters need to be pressed.
 *F* keys are placed in similar way that numbers are placed in the *Numbers* layer.
-Media keys—useful for controlling your computer and keyboard settings—are also here.
+Media keys - useful for controlling your computer and keyboard settings - are also here.
 As seen in the picture, on wireless keyboard I control the bluetooth settings here. On wired keyboards that have LEDs there are LED controls instead.
 This is also the layer where the `Caps Lock` key has found its place.
 It's also worth noting that this layer includes keys that let me switch between *Colemak* and *QWERTY* as the default layer.
@@ -174,9 +174,9 @@ I don't use it currently, but I'm considering adding a macro that sends my e-mai
 
 ## Closing thoughts
 
-A well-designed keymap is what truly unlocks the potential of any keyboard—it's the bridge between hardware and comfort.
+A well-designed keymap is what truly unlocks the potential of any keyboard - it's the bridge between hardware and comfort.
 Even with great hardware you need a proper keymap to actually make it work for you.
-And with a great keymap, you can still have a good experience—even with less ergonomic hardware.
+And with a great keymap, you can still have a good experience - even with less ergonomic hardware.
 
 ## References
 
