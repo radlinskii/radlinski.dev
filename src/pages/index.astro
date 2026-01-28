@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Divider from "../components/Divider.astro";
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
 ---
 
@@ -21,10 +22,10 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
             <div class="main-container">
                 <div class="text-container">
                     <h1>&gt;hi</h1>
-                    <p class="unselectable">+++</p>
+                    <Divider />
                     <p>
                         name = Ignacy Radliński<br />
-                        position = Software Engineer @ u-blox<br />
+                        position = Senior Software Engineer @ u-blox<br />
                         github = <a
                             href="https://github.com/radlinskii"
                             target="_blank">https://github.com/radlinskii</a
@@ -35,21 +36,23 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
                             >https://www.linkedin.com/in/ignacy-radlinski</a
                         >
                     </p>
-                    <p class="unselectable">+++</p>
+                    <Divider />
                     <p>
-                        At some point, maybe I'll add something to
-                        <a href="/posts" style="pointer-events: none">/posts</a
+                        If I ever find the time again, I'll to add some more <a
+                            href="/posts">/posts</a
                         ><br />
-                        ...something about ergonomic keyboards, configuring NeoVim,<br
-                        />
+                        ...something about ergonomic keyboards, <br />
+                        my home lab setup, configuring NeoVim,<br />
                         or other tools from my development environment,<br />
-                        how I built this website and some of my other side projects,<br
+                        how I built this website or some of my other side projects,<br
                         />
                         programming in general, hiking in Switzerland,<br />
                         swimming, ornithology, bread baking,<br />
                         or other things I'm interested in.<br />
                     </p>
-                    <p class="show-on-mobile unselectable">+++</p>
+                    <div class="show-on-mobile">
+                        <Divider />
+                    </div>
                 </div>
                 <div class="image-container">
                     <img
@@ -79,15 +82,18 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
         width: 720px;
         max-width: calc(100% - 2rem);
         margin: auto;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     @media screen and (width >= 1024px) {
         .main-container {
             width: 1024px;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
+
+            /* 100vh - header height - footer height - padding - some margin */
+            min-height: calc(100vh - 68px - 82px - 4rem - 2px);
         }
 
         .text-container {

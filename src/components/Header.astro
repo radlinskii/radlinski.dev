@@ -1,12 +1,18 @@
 ---
 import ThemeSelect from "./ThemeSelect.astro";
+import HeaderLink from "./HeaderLink.astro";
 import { SITE_NAME } from "../consts";
 ---
 
 <header>
     <nav>
-        <h2><a href="/">{SITE_NAME}</a></h2>
-        <ThemeSelect />
+        <h2>
+            <HeaderLink href="/">{SITE_NAME}/</HeaderLink>
+        </h2>
+        <div class="nav-panel">
+            <HeaderLink href="/posts">/posts</HeaderLink>
+            <ThemeSelect />
+        </div>
     </nav>
 </header>
 
@@ -32,19 +38,18 @@ import { SITE_NAME } from "../consts";
         font-size: 1.2rem;
     }
 
-    nav h2 a {
-        color: var(--fg-color1);
-        text-decoration: none;
-    }
-
-    nav h2 a:hover {
-        color: var(--accent2);
-        text-decoration: underline;
+    .nav-panel {
+        display: flex;
+        gap: 2rem;
     }
 
     @media (width < 1024px) {
         header {
             padding: 0.5rem 1rem;
+        }
+
+        .nav-panel {
+            gap: 1rem;
         }
     }
 </style>

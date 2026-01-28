@@ -75,6 +75,14 @@
     #theme-select {
         border: 0;
         background: none;
+        display: flex;
+        align-items: center;
+    }
+
+    @media screen and (width <= 720px) {
+        #theme-select {
+            display: none;
+        }
     }
 
     html[data-theme="dark"] .mode-icon path {

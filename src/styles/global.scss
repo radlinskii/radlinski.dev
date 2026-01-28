@@ -19,9 +19,9 @@
     --fg-color3: rgb(var(--fg-color3-rgb));
     --accent1: rgb(97 155 225);
     --accent2: rgb(225 155 97);
-    --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
-        0 8px 24px rgba(var(--fg-color1-rgb), 33%),
-        0 16px 32px rgba(var(--fg-color1-rgb), 33%);
+    --box-shadow: 0 2px 6px rgba(var(--bg-color1-rgb), 100%),
+        0 8px 24px rgba(var(--bg-color1-rgb), 95%),
+        0 16px 32px rgba(var(--bg-color1-rgb), 90%);
 }
 
 :root[data-theme="light"] {
@@ -86,13 +86,6 @@ main {
     background: var(--bg-color2);
 }
 
-@media screen and (width>=1024px) {
-    main {
-        /* 100vh - header height - footer height - some margin */
-        min-height: calc(100vh - 68px - 82px - 2px);
-    }
-}
-
 h1,
 h2,
 h3,
@@ -109,15 +102,15 @@ h1 {
 }
 
 h2 {
-    font-size: 2.441rem;
+    font-size: 2rem;
 }
 
 h3 {
-    font-size: 1.953rem;
+    font-size: 1.75rem;
 }
 
 h4 {
-    font-size: 1.563rem;
+    font-size: 1.5rem;
 }
 
 h5 {
@@ -167,7 +160,7 @@ img {
 
 code {
     padding: 2px 5px;
-    background-color: var(--fg-color2);
+    background-color: var(--bg-color1);
     border-radius: 2px;
 }
 
@@ -181,10 +174,11 @@ pre > code {
 }
 
 blockquote {
-    border-left: 4px solid var(--accent1);
+    border-left: 4px solid var(--accent2);
     padding: 0 0 0 20px;
     margin: 0;
-    font-size: 1.333rem;
+    font-size: 0.9rem;
+    line-height: 1.1;
 }
 
 hr {
@@ -216,6 +210,8 @@ hr {
 
 .unselectable {
     -webkit-touch-callout: none;
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-user-select: none;
     user-select: none;
 }
 
