@@ -3,7 +3,7 @@ title: "Ergonomic keyboard"
 description: "Article about what features make a keyboard truly ergonomic."
 tldr: "I couldn't find the perfect keyboard for me so I had to build it myself. I go through the features that it has and could have."
 pubDate: 2025-11-22
-updatedDate: 
+updatedDate: 2026-01-28
 heroImage: "/posts/ergonomic-keyboard/mechabasilisk_3.jpeg"
 heroImageAlt: "My Mecha Basilisk ergonomic keyboard"
 ---

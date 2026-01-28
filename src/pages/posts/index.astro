@@ -124,7 +124,7 @@ const posts = (await getCollection("posts")).sort(
                     {
                         posts.map((post) => (
                             <li>
-                                <a href={`/posts/${post.slug}/`}>
+                                <a href={`/posts/${post.id}/`}>
                                     <img
                                         width={720}
                                         height={360}

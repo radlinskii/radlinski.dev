@@ -19,9 +19,10 @@
     --fg-color3: rgb(var(--fg-color3-rgb));
     --accent1: rgb(97 155 225);
     --accent2: rgb(225 155 97);
-    --box-shadow: 0 2px 6px rgba(var(--bg-color1-rgb), 100%),
-        0 8px 24px rgba(var(--bg-color1-rgb), 95%),
-        0 16px 32px rgba(var(--bg-color1-rgb), 90%);
+    --box-shadow:
+        0 2px 6px rgb(var(--bg-color1-rgb), 100%),
+        0 8px 24px rgb(var(--bg-color1-rgb), 95%),
+        0 16px 32px rgb(var(--bg-color1-rgb), 90%);
 }
 
 :root[data-theme="light"] {
@@ -39,17 +40,18 @@
     --fg-color3: rgb(var(--fg-color3-rgb));
     --accent1: rgb(47 95 145);
     --accent2: rgb(225 155 97);
-    --box-shadow: 0 2px 6px rgba(var(--fg-color1-rgb), 25%),
-        0 8px 24px rgba(var(--fg-color1-rgb), 33%),
-        0 16px 32px rgba(var(--fg-color1-rgb), 33%);
+    --box-shadow:
+        0 2px 6px rgb(var(--fg-color1-rgb), 25%),
+        0 8px 24px rgb(var(--fg-color1-rgb), 33%),
+        0 16px 32px rgb(var(--fg-color1-rgb), 33%);
 }
 
 @font-face {
     font-family: IosevkaTermNerdFontPropo;
     font-style: normal;
     font-weight: 400;
-    src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"),
-        local("ttf");
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"), local("ttf");
     font-display: swap;
 }
 
@@ -76,7 +78,6 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    word-wrap: break-word;
     overflow-wrap: break-word;
     color: var(--fg-color2);
     background: var(--bg-color1);
@@ -196,10 +197,14 @@ hr {
     overflow: hidden;
 
     /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+    /* stylelint-disable property-no-deprecated */
     clip: rect(1px 1px 1px 1px);
+    /* stylelint-enable property-no-deprecated */
 
     /* maybe deprecated but we need to support legacy browsers */
+    /* stylelint-disable property-no-deprecated */
     clip: rect(1px, 1px, 1px, 1px);
+    /* stylelint-enable property-no-deprecated */
 
     /* modern browsers, clip-path works inwards from each corner */
     clip-path: inset(50%);
