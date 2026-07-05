@@ -8,25 +8,25 @@ heroImage: "/posts/ergonomic-keyboard/mechabasilisk_3.jpeg"
 heroImageAlt: "My Mecha Basilisk ergonomic keyboard"
 ---
 
-I had to test my Immich backup setup is working to sleep well at night without worrying about my family photos archive. I've decided to note what I'm doing to also be able to know what to do in the worst case scenario when I would actually need to use the backup.
+I had to test that my Immich backup setup is working so I can sleep well at night without worrying about my family photos archive. I've decided to write it down so I don't have to improvise with AI, but instead know exactly what to do in the worst case scenario when I actually need to use the backup to restore our photos.
 
-There are many "Immich setup" guides in the internet, there are also many "Backup guides", but I  didn't see any where people actually test properly if a full recovery of the backup works.  I've decided to share my notes then to create such backup. Who knows, maybe you'll find it helpful.
+There are many "Immich setup" guides on the internet, and there are also many "Backup guides", but I didn't see anywhere people actually test if a full recovery of the backup works. I've decided to share my notes on how to create such a backup. Who knows, maybe you'll find it helpful.
 
 ## Prerequisites
 
-I'm not running the apps used in this guide using Docker. Instead I'm running them as LXC on Proxmox VE (Debian-based) v9.2.3.
+I'm not running the apps in this guide using Docker. Instead I'm running them as LXC on Proxmox VE (Debian-based) v9.2.3.
 
 ### Creating the mount point
 
-I will skip this step here. There are plenty of guides on how to do it. I had to actually resize the existing `lvm` to have space for the separate mount point for Immich, so just google how to create a new one. I might document that process of resizing existing one too, because it deserves a separate guide.
+I'll skip going over this step here. There are plenty of guides on how to do it. I had to resize the existing `lvm` to have space for the separate mount point for Immich, so just google how to create a new one. I might document the process of resizing an existing one too, because it deserves a separate guide.
 
 I will assume the mount point is already created and available at `/mnt/immich-media` from the proxmox host.
 
 ### Immich setup
 
-Create new LXC for new Immich instance using the helper script: <https://community-scripts.org/scripts/immich>,
+Create a new LXC for a new Immich instance using the helper script: <https://community-scripts.org/scripts/immich>,
 
-LXC id is `113`, Immich services are running by the `immich` user.
+LXC id is `113`, Immich services are run by the `immich` user.
 
 #### 1. Stop the container after it is installed
 
@@ -113,13 +113,13 @@ systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
 rm -rf /opt/immich/upload
 ```
 
-#### 5. Confirm the Immich app is working by navigating to the url printed in the log after the container was created and e.g. uploading some files there
+#### 5. Confirm the Immich app is working by navigating to the URL printed in the log after the container was created, and try uploading some files
 
 ### Backrest setup
 
-Setup LXC using helper script with default settings: <https://community-scripts.org/scripts/backrest>
+Set up a new LXC using the helper script with default settings: <https://community-scripts.org/scripts/backrest>
 
-LXC id is 114, backrest is running by the `root` user.
+LXC id is 114, Backrest is run by the `root` user.
 
 ### Giving access to the mount point for both Immich and Backrest
 
@@ -182,11 +182,11 @@ pct exec 114 -- bash -c "touch /mnt/immich-media/.test2 && rm /mnt/immich-media/
 
 ## Backup setup
 
-A prerequisite here would be to create an account in Backblaze.
+A prerequisite here is to create an account on Backblaze.
 
 ### Backrest plan and repository setup
 
-I followed the guide here: <https://www.linuxserver.io/blog/backup-your-data-to-b2-with-restic-and-backrest> to setup the backup plan and `restic` repository on Backblaze B2. I won't copy it's instructiions, but thanks to backrest UI I can easily show the end result using json format. Using those JSONs and the above guide the UI configuration can be replicated easily enough I think.
+I followed the guide here: <https://www.linuxserver.io/blog/backup-your-data-to-b2-with-restic-and-backrest> to set up the backup plan and `restic` repository on Backblaze B2. I won't copy its instructions, but thanks to the Backrest UI I can easily show the end result in JSON format. Using the JSON configs and the guide above, the UI configuration can be replicated easily enough.
 
 Repository config:
 
@@ -200,15 +200,15 @@ Backup plan config:
 `{ "id": "my-immich-backup-daily", "repo": "immich-backup", "paths": [ "/mnt/immich-media/backups", "/mnt/immich-media/encoded-video", "/mnt/immich-media/library", "/mnt/immich-media/profile", "/mnt/immich-media/thumbs", "/mnt/immich-media/upload" ], "excludes": [], "retention": { "policyTimeBucketed": { "hourly": 24, "daily": 30, "weekly": 0, "monthly": 12, "yearly": 0, "keepLastN": 0 } }, "hooks": [ { "conditions": [ "CONDITION_SNAPSHOT_START" ], "onError": "ON_ERROR_FATAL", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-pre.sh" } }, { "conditions": [ "CONDITION_SNAPSHOT_END" ], "onError": "ON_ERROR_RETRY_10MINUTES", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-post.sh" } } ], "iexcludes": [], "backup_flags": [], "schedule": { "cron": "0 3 * * *", "clock": "CLOCK_LOCAL" }, "skipIfUnchanged": false }`
 ```
 
-> I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up — likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
+> I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
 
 ### Creating Immich database dump
 
-Before creating a backup snapshot it is crucial to make sure to include an up-to-date database snapshot too. I do it  using Backrest backup Plan feature called Hooks. You can already see them in the JSONs above.
+Before creating a backup snapshot it is crucial to include an up-to-date database snapshot too. I do it using the Backrest backup plan feature called Hooks. You can already see them in the JSON configs above.
 
 #### Coordination between Backrest and Immich containers
 
-The problem there is that I want to create a db dump, as part of the Backrest workflow, but the db is in the Immich container, so I had to come up with a way to communicate at least from Backrest to Immich to invoke the creation of db snapshot. As both containers are unprivileged, the solution I chose was using `ssh`.
+The problem is that I want to create a db dump as part of the Backrest workflow, but the db is in the Immich container, so I had to come up with a way to communicate from Backrest to Immich to invoke the creation of the db snapshot. Since both containers are unprivileged, I chose to use `ssh`.
 
 ##### Step 1 - Install SSH Server on LXC 113
 
@@ -232,7 +232,7 @@ pct exec 114 -- bash -c "apt update && apt install -y openssh-client"
 pct exec 114 -- ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519_lxc_shared -N ""
 ```
 
-The `root@backrest` comment at the end of the public key is just a label — SSH ignores it during authentication.
+The `root@backrest` comment at the end of the public key is just a label - SSH ignores it during authentication.
 
 ##### Step 4 - Copy Public Key to LXC 113
 
@@ -358,7 +358,7 @@ log() {
 log "Starting Immich backup preparation"
 
 # Stop Immich services
-log "Stopping Immich serivces..."
+log "Stopping Immich services..."
 systemctl stop immich-web immich-ml
 log "Immich services stopped"
 
@@ -396,13 +396,13 @@ log "stopping PostgreSQL"
 systemctl stop postgresql
 log "PostgreSQL stopped"
 
-log "Backup preparatoin complete"
+log "Backup preparation complete"
 
 ```
 
 #### Post-backup hook configuration
 
-Runs after the snapshot finishes. On both failure and success. It's only there to restart the services that the `pre hook` stopped.  It is set up in the Backrest UI.
+Runs after the snapshot finishes, on both failure and success. It's only there to restart the services that the `pre hook` stopped.  It is set up in the Backrest UI.
 
 Runs on event: `CONDITION_SNAPSHOT_END` added in the Backrest Plan.  It is a `Command` hook, with `ON_ERROR_RETRY_10MINUTES` error behavior.
 
@@ -451,7 +451,7 @@ else
  ERRORS=$((ERRORS + 1))
 fi
 
-# Wait for Postgrs to be ready before starting Immich
+# Wait for Postgres to be ready before starting Immich
 if command -v pg_isready &>/dev/null; then
  log "Waiting for PostgreSQL to accept connections..."
  for i in $(seq 1 60); do
@@ -469,14 +469,14 @@ fi
 # Start Immich services
 log "Starting Immich services..."
 if systemctl start immich-ml immich-web; then
- log "Immich services statred"
+ log "Immich services started"
 else
  log "ERROR: Failed to start Immich services!"
  ERRORS=$((ERRORS + 1))
 fi
 
 if [ "$ERRORS" -gt 0 ]; then
- log "WARNING: Complteed with $ERRORS error(s)"
+ log "WARNING: Completed with $ERRORS error(s)"
  exit 1
 fi
 
@@ -490,7 +490,7 @@ log "All services recovered successfully"
 
 ### 2. After the files are downloaded check the permissions
 
-They should operate on the group `immich-media` with gid `20000` so group should have `rwx` permissions set when doing `ls`. Also you can use `getfacl` to see the default ACL, it should be there in place already.
+They should be set to the group `immich-media` with gid `20000` — the group should have `rwx` permissions when you run `ls`. Also you can use `getfacl` to see the default ACL, it should be there in place already.
 
 In case permissions are wrong, run (on the host):
 
@@ -620,19 +620,19 @@ Once the app is running, confirm the restore worked:
 
 The learnings from the first full restore test, that are already included in the notes above, so feel free to ignore them.
 
-1. After backup is downloaded correct rights for group were not there.
+1. After the backup was downloaded, the correct group permissions were not set.
    > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
 
-2. IMO it's better to backup all *Immich related* directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead during e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
+2. IMO it's better to back up all *Immich-related* directories (even /backups, /thumbs/ and /encoded-video) — I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
    > UPDATED the Backrest plan to include those directories.
 
-3. The db_dump had "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory, and just let it be one of the backups there, it will be the most recent one always.
+3. The db_dump had an "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory and let it be one of the files backed up there — it will always be the most recent one.
     The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
     > UPDATED the Pre-backup hook script
 
 #### Second restore test
 
-Second test was using a backup from Immich version 2.7.5 and a new Immich instance in LXC 115 with version 3.0.1, because there was a major update the day before the test. I was a bit nervous, but following this guide 1:1 this test worked flawlessly.
+The second test used a backup from Immich version 2.7.5 and restored it to a new Immich instance in LXC 115 running version 3.0.1, because there was a major update the day before the test. I was a bit nervous, but following this guide 1:1 the restore worked flawlessly.
 
 ## Monitoring the backup
 
@@ -685,7 +685,7 @@ curl -s -X POST http://<home assistant ip>/api/webhook/<webhook id> \
 
 With this setup, if any operation fails I will know to open Backrest and investigate.
 
-> And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here. I will probably also create some periodic notification e.g. once a quarter to check the backups in backrest in case this "monitoring system fails."
+> And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here. I will probably also create some periodic notification e.g. once a quarter to check the backups in Backrest in case this "monitoring system fails."
 
 ## Periodic restore testing
 
