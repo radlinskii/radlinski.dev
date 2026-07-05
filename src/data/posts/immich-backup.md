@@ -191,7 +191,7 @@ I followed the guide here: <https://www.linuxserver.io/blog/backup-your-data-to-
 Repository config:
 
 ```json
-`{ "id": "immich-backup", "uri": "s3://s3.eu-central-003.backblazeb2.com/<bucketName>", "password": "<pass>", "env": [ "AWS_ACCESS_KEY_ID=<keyId>", "AWS_SECRET_ACCESS_KEY=<applicationKey>" ], "flags": [], "prunePolicy": { "schedule": { "cron": "0 0 1 * *", "clock": "CLOCK_LAST_RUN_TIME" }, "maxUnusedBytes": "0", "maxUnusedPercent": 10 }, "hooks": [], "autoUnlock": false, "checkPolicy": { "schedule": { "cron": "0 1 */7 * *", "clock": "CLOCK_LAST_RUN_TIME" } }, "commandPrefix": { "ioNice": "IO_DEFAULT", "cpuNice": "CPU_DEFAULT" }, "guid": "<someId>", "autoInitialize": false, "shared": false, "originInstanceId": "", "forgetPolicy": { "schedule": { "cron": "0 2 * * *", "clock": "CLOCK_LAST_RUN_TIME" }, "retention": { "policyTimeBucketed": { "hourly": 0, "daily": 14, "weekly": 8, "monthly": 12, "yearly": 2, "keepLastN": 0 } } } }`
+`{ "id": "immich-backup", "uri": "s3://<backblaze b2 region>/<bucket name>", "password": "<pass>", "env": [ "AWS_ACCESS_KEY_ID=<key id>", "AWS_SECRET_ACCESS_KEY=<application key>" ], "flags": [], "prunePolicy": { "schedule": { "cron": "0 0 1 * *", "clock": "CLOCK_LAST_RUN_TIME" }, "maxUnusedBytes": "0", "maxUnusedPercent": 10 }, "hooks": [], "autoUnlock": false, "checkPolicy": { "schedule": { "cron": "0 1 */7 * *", "clock": "CLOCK_LAST_RUN_TIME" } }, "commandPrefix": { "ioNice": "IO_DEFAULT", "cpuNice": "CPU_DEFAULT" }, "guid": "<some id>", "autoInitialize": false, "shared": false, "originInstanceId": "", "forgetPolicy": { "schedule": { "cron": "0 2 * * *", "clock": "CLOCK_LAST_RUN_TIME" }, "retention": { "policyTimeBucketed": { "hourly": 0, "daily": 14, "weekly": 8, "monthly": 12, "yearly": 2, "keepLastN": 0 } } } }`
 ```
 
 Backup plan config:
@@ -199,6 +199,8 @@ Backup plan config:
 ```json
 `{ "id": "my-immich-backup-daily", "repo": "immich-backup", "paths": [ "/mnt/immich-media/backups", "/mnt/immich-media/encoded-video", "/mnt/immich-media/library", "/mnt/immich-media/profile", "/mnt/immich-media/thumbs", "/mnt/immich-media/upload" ], "excludes": [], "retention": { "policyTimeBucketed": { "hourly": 24, "daily": 30, "weekly": 0, "monthly": 12, "yearly": 0, "keepLastN": 0 } }, "hooks": [ { "conditions": [ "CONDITION_SNAPSHOT_START" ], "onError": "ON_ERROR_FATAL", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-pre.sh" } }, { "conditions": [ "CONDITION_SNAPSHOT_END" ], "onError": "ON_ERROR_RETRY_10MINUTES", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-post.sh" } } ], "iexcludes": [], "backup_flags": [], "schedule": { "cron": "0 3 * * *", "clock": "CLOCK_LOCAL" }, "skipIfUnchanged": false }`
 ```
+
+> I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up — likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
 
 ### Creating Immich database dump
 
@@ -247,7 +249,7 @@ pct exec 113 -- mkdir -p /root/.ssh
 ```
 
 ```bash
-pct exec 113 -- bash -c "echo '<public-key-here>' >> /root/.ssh/authorized_keys"
+pct exec 113 -- bash -c "echo '<public key>' >> /root/.ssh/authorized_keys"
 ```
 
 ```bash
@@ -261,7 +263,7 @@ Edit `/etc/ssh/sshd_config` inside LXC 113, add:
 
 ```txt
 PasswordAuthentication no
-AllowUsers root@<LXC-114-IP>
+AllowUsers root@<lxc 114 ip>
 ```
 
 Restart SSH:
@@ -276,7 +278,7 @@ Create `/root/.ssh/config` inside LXC 114:
 
 ```txt
 Host immich
-    HostName <LXC-113-IP>
+    HostName <lxc 113 ip>
     User root
     IdentityFile /root/.ssh/id_ed25519_lxc_shared
 ```
@@ -493,8 +495,8 @@ They should operate on the group `immich-media` with gid `20000` so group should
 In case permissions are wrong, run (on the host):
 
 ```bash
-chmod -R g+rwX /mnt/immich-media/test-backup2
-setfacl -R -d -m g:20000:rwX /mnt/immich-media/test-backup2
+chmod -R g+rwX /mnt/immich-media/test-backup
+setfacl -R -d -m g:20000:rwX /mnt/immich-media/test-backup
 ```
 
 ### 3. Check the exact path of the immich directories
@@ -502,7 +504,7 @@ setfacl -R -d -m g:20000:rwX /mnt/immich-media/test-backup2
 During the test it was:
 
 ```txt
-/mnt/immich-media/test-backup2/immich-media/
+/mnt/immich-media/test-backup/immich-media/
 ```
 
 ### 4. Create new LXC for new Immich instance
@@ -524,7 +526,7 @@ nvim /etc/pve/lxc/115.conf
 and add:
 
 ```txt
-mp0: /mnt/immich-media/test-backup2/immich-media/,mp=/mnt/immich-media
+mp0: /mnt/immich-media/test-backup/immich-media/,mp=/mnt/immich-media
 
 lxc.idmap: u 0 100000 65536
 lxc.idmap: g 0 100000 20000
@@ -605,6 +607,15 @@ systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
 
 New immich instance should be able to be initialized using this db dump. <https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding>
 
+### 10. Verify the restore
+
+Once the app is running, confirm the restore worked:
+
+- Log in with your existing admin credentials
+- Browse to a known album or timeline — previously uploaded photos and videos should be visible
+- Check that user accounts are intact under Administration → Users
+- If you spot test/placeholder albums from the fresh install, delete them
+
 #### First restore test
 
 The learnings from the first full restore test, that are already included in the notes above, so feel free to ignore them.
@@ -642,7 +653,7 @@ triggers:
       - POST
       - PUT
     local_only: true
-    webhook_id: "<webhookId>"
+    webhook_id: "<webhook id>"
 conditions: []
 actions:
  - action: persistent_notification.create
@@ -662,12 +673,12 @@ mode: single
 ### Handling failures in Backrest
 
 In the Backrest backup plan I've added more hooks.
-The hooks run on `CONDITION_SNAPSHOT_ERROR`, `CONDITION_CHECK_ERROR`, `CONDITION_FORGET_ERROR`, `CONDITION_PRUNE_ERROR`.  
+The hooks run on `CONDITION_SNAPSHOT_ERROR`, `CONDITION_CHECK_ERROR`, `CONDITION_FORGET_ERROR`, `CONDITION_PRUNE_ERROR`.
 
 The command is the same for all, and just changes the message to indicate which operation has failed.
 
 ```bash
-curl -s -X POST http://<Home Assistant IP>/api/webhook/<webkhookId> \
+curl -s -X POST http://<home assistant ip>/api/webhook/<webhook id> \
 -H "Content-Type: application/json" \
 -d '{"message": "Immich backup SNAPSHOT/CHECK/FORGET/PRUNE failed"}'
 ```
@@ -675,3 +686,7 @@ curl -s -X POST http://<Home Assistant IP>/api/webhook/<webkhookId> \
 With this setup, if any operation fails I will know to open Backrest and investigate.
 
 > And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here. I will probably also create some periodic notification e.g. once a quarter to check the backups in backrest in case this "monitoring system fails."
+
+## Periodic restore testing
+
+Plan to run this restore procedure every 3 months or so. The monitoring notifies me about failures, but it also might fail. The whole backrest container might fail. Also, a full restore test is the only way to catch silent data corruption before it's too late.
