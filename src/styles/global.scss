@@ -68,7 +68,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 16px;
     font-family: IosevkaTermNerdFontPropo, monospace;
     line-height: 1.4;
 }
@@ -108,7 +108,7 @@ h6 {
 }
 
 .prose {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .prose h1 {
@@ -215,7 +215,6 @@ blockquote {
     border-left: 4px solid var(--accent2);
     padding: 0 0 0 20px;
     margin: 0;
-    font-size: 0.9rem;
     line-height: 1.1;
 }
 
