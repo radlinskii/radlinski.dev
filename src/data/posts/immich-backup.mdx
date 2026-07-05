@@ -210,13 +210,92 @@ I followed the guide here: [linuxserver.io blog](https://www.linuxserver.io/blog
 Repository config:
 
 ```json
-`{ "id": "immich-backup", "uri": "s3://<backblaze b2 region>/<bucket name>", "password": "<pass>", "env": [ "AWS_ACCESS_KEY_ID=<key id>", "AWS_SECRET_ACCESS_KEY=<application key>" ], "flags": [], "prunePolicy": { "schedule": { "cron": "0 0 1 * *", "clock": "CLOCK_LAST_RUN_TIME" }, "maxUnusedBytes": "0", "maxUnusedPercent": 10 }, "hooks": [], "autoUnlock": false, "checkPolicy": { "schedule": { "cron": "0 1 */7 * *", "clock": "CLOCK_LAST_RUN_TIME" } }, "commandPrefix": { "ioNice": "IO_DEFAULT", "cpuNice": "CPU_DEFAULT" }, "guid": "<some id>", "autoInitialize": false, "shared": false, "originInstanceId": "", "forgetPolicy": { "schedule": { "cron": "0 2 * * *", "clock": "CLOCK_LAST_RUN_TIME" }, "retention": { "policyTimeBucketed": { "hourly": 0, "daily": 14, "weekly": 8, "monthly": 12, "yearly": 2, "keepLastN": 0 } } } }`
+{
+    "id": "immich-backup",
+    "uri": "s3://<backblaze b2 region>/<bucket name>",
+    "password": "<pass>",
+    "env": [
+        "AWS_ACCESS_KEY_ID=<key id>",
+        "AWS_SECRET_ACCESS_KEY=<application key>"
+    ],
+    "flags": [],
+    "prunePolicy": {
+        "schedule": {
+            "cron": "0 0 1 * *",
+            "clock": "CLOCK_LAST_RUN_TIME"
+        },
+        "maxUnusedBytes": "0",
+        "maxUnusedPercent": 10
+    },
+    "hooks": [],
+    "autoUnlock": false,
+    "checkPolicy": {
+        "schedule": {
+            "cron": "0 1 */7 * *",
+            "clock": "CLOCK_LAST_RUN_TIME"
+        }
+    },
+    "commandPrefix": {
+        "ioNice": "IO_DEFAULT",
+        "cpuNice": "CPU_DEFAULT"
+    },
+    "guid": "<some id>",
+    "autoInitialize": false,
+    "shared": false,
+    "originInstanceId": "",
+    "forgetPolicy": {
+        "schedule": {
+            "cron": "0 2 * * *",
+            "clock": "CLOCK_LAST_RUN_TIME"
+        },
+        "retention": {
+            "policyTimeBucketed": {
+                "hourly": 0,
+                "daily": 14,
+                "weekly": 8,
+                "monthly": 12,
+                "yearly": 2,
+                "keepLastN": 0
+            }
+        }
+    }
+}
 ```
 
 Backup plan config:
 
 ```json
-`{ "id": "my-immich-backup-daily", "repo": "immich-backup", "paths": [ "/mnt/immich-media/backups", "/mnt/immich-media/encoded-video", "/mnt/immich-media/library", "/mnt/immich-media/profile", "/mnt/immich-media/thumbs", "/mnt/immich-media/upload" ], "excludes": [], "retention": { "policyTimeBucketed": { "hourly": 24, "daily": 30, "weekly": 0, "monthly": 12, "yearly": 0, "keepLastN": 0 } }, "hooks": [ { "conditions": [ "CONDITION_SNAPSHOT_START" ], "onError": "ON_ERROR_FATAL", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-pre.sh" } }, { "conditions": [ "CONDITION_SNAPSHOT_END" ], "onError": "ON_ERROR_RETRY_10MINUTES", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-post.sh" } } ], "iexcludes": [], "backup_flags": [], "schedule": { "cron": "0 3 * * *", "clock": "CLOCK_LOCAL" }, "skipIfUnchanged": false }`
+{
+    "id": "my-immich-backup-daily",
+    "repo": "immich-backup",
+    "paths": [
+        "/mnt/immich-media/backups",
+        "/mnt/immich-media/encoded-video",
+        "/mnt/immich-media/library",
+        "/mnt/immich-media/profile",
+        "/mnt/immich-media/thumbs",
+        "/mnt/immich-media/upload"
+    ],
+    "excludes": [],
+    "retention": {
+        "policyTimeBucketed": {
+            "hourly": 24,
+            "daily": 30,
+            "weekly": 0,
+            "monthly": 12,
+            "yearly": 0,
+            "keepLastN": 0
+        }
+    },
+    "hooks": [<added in sections below>],
+    "iexcludes": [],
+    "backup_flags": [],
+    "schedule": {
+        "cron": "0 3 * * *",
+        "clock": "CLOCK_LOCAL"
+    },
+    "skipIfUnchanged": false
+}
 ```
 
 Note: I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
