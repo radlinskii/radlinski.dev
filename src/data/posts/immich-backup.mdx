@@ -1,11 +1,10 @@
 ---
-title: "Setup Immich with backup and test recovery"
+title: "Setup Immich with backup and verify recovery"
 description: "Step-by-step guide for setting up automated Immich backups with Backrest and Backblaze B2, including full restore testing, database dump coordination via SSH, and monitoring with Home Assistant."
 tldr: "Immich backup with Backrest with Home Assistant failure notifications sending data to Backblaze B2 from separate containers with shared mount point."
-pubDate: 2026-07-14
-updatedDate: 2026-07-15
-heroImage: "/posts/ergonomic-keyboard/mechabasilisk_3.jpeg"
-heroImageAlt: "My Mecha Basilisk ergonomic keyboard"
+pubDate: 2026-07-05
+heroImage: "/posts/immich-backup/immich-backup.jpg"
+heroImageAlt: "Immich backup setup diagram"
 ---
 
 I had to test that my Immich backup setup is working so I can sleep well at night without worrying about my family photos archive. I've decided to write it down so I don't have to improvise with AI, but instead know exactly what to do in the worst case scenario when I actually need to use the backup to restore our photos.
@@ -733,15 +732,16 @@ The learnings from the first full restore test, that are already included in the
 
 1. After the backup was downloaded, the correct group permissions were not set.
 
-    > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
+    > Would be nice to fix it somehow, but can also be quickly adjusted manually along with other parts so `¯\_(ツ)_/¯`.
 
 2. IMO it's better to back up all _Immich-related_ directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
 
-    > UPDATED the Backrest plan to include those directories.
+    > UPDATED: the Backrest plan to include those directories.
 
 3. The db_dump had an "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory and let it be one of the files backed up there - it will always be the most recent one.
    The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
-    > UPDATED the Pre-backup hook script
+
+    > UPDATED: the Pre-backup hook script
 
 #### Second restore test
 
