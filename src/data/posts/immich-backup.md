@@ -52,7 +52,7 @@ mp0: /mnt/immich-media/,mp=/mnt/immich-media
 pct start 113
 ```
 
-1. Set `/mnt/mmich-media/` as the location for uploads of the  Immich container. The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+1. Set `/mnt/immich-media/` as the location for uploads of the  Immich container. The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
 1. enter the container
 
     ```bash
@@ -156,8 +156,8 @@ pct reboot 114
 1. verify the access rights
 
 ```bash
-pct exec 113 - su -s /bin/bash immich -c "touch /mnt/immich-media/.test1 && rm /mnt/immich-media/.test1 && echo OK"
-pct exec 114 - bash -c "touch /mnt/immich-media/.test2 && rm /mnt/immich-media/.test2 && echo OK"
+pct exec 113 -- su -s /bin/bash immich -c "touch /mnt/immich-media/.test1 && rm /mnt/immich-media/.test1 && echo OK"
+pct exec 114 -- bash -c "touch /mnt/immich-media/.test2 && rm /mnt/immich-media/.test2 && echo OK"
 ```
 
 ## Backup setup
@@ -348,7 +348,7 @@ sleep 2
 # Dump database to a temp file (atomic replace)
 log "Dumping database..."
 
-IMMICH_VERSION=$(npx immich --version)
+IMMICH_VERSION=$(/opt/immich/app/cli/bin/immich --version)
 TIMESTAMP=$(date +%Y%m%dT%H%M%S)
 
 PG_VERSION_RAW=$(sudo -u postgres psql -qtAX -c "SHOW server_version;")
@@ -408,6 +408,7 @@ Content:
 
 ```bash
 #!/bin/bash
+# -e intentionally omitted — errors are handled via $ERRORS below
 set -uo pipefail
 
 # logging helper
@@ -431,7 +432,7 @@ else
 fi
 
 # Wait for Postgrs to be ready before starting Immich
-if command -v pg_isready $>/dev/null; then
+if command -v pg_isready &>/dev/null; then
  log "Waiting for PostgreSQL to accept connections..."
  for i in $(seq 1 60); do
   if pg_isready -U postgres &>/dev/null; then
