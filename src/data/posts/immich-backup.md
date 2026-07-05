@@ -1,5 +1,5 @@
 ---
-title: "Immich Backup and restore guide"
+title: "Setup Immich with backup and test recovery"
 description: "Step-by-step guide for setting up automated Immich backups with Backrest and Backblaze B2, including full restore testing, database dump coordination via SSH, and monitoring with Home Assistant."
 tldr: "Immich backup with Backrest with Home Assistant failure notifications sending data to Backblaze B2 from separate containers with shared mount point."
 pubDate: 2026-07-14
@@ -12,6 +12,8 @@ I had to test that my Immich backup setup is working so I can sleep well at nigh
 
 There are many "Immich setup" guides on the internet, and there are also many "Backup guides", but I didn't see anywhere people actually test if a full recovery of the backup works. I've decided to share my notes on how to create such a backup. Who knows, maybe you'll find it helpful.
 
+---
+
 ## Prerequisites
 
 I'm not running the apps in this guide using Docker. Instead I'm running them as LXC on Proxmox VE (Debian-based) v9.2.3.
@@ -21,6 +23,8 @@ I'm not running the apps in this guide using Docker. Instead I'm running them as
 I'll skip going over this step here. There are plenty of guides on how to do it. I had to resize the existing `lvm` to have space for the separate mount point for Immich, so just google how to create a new one. I might document the process of resizing an existing one too, because it deserves a separate guide.
 
 I will assume the mount point is already created and available at `/mnt/immich-media` from the proxmox host.
+
+---
 
 ### Immich setup
 
@@ -34,7 +38,7 @@ LXC id is `113`, Immich services are run by the `immich` user.
 pct stop 113
 ```
 
-#### 2. in the config of new lxc container add the mount point
+#### 2. In the config of new lxc container add the mount point
 
 ```bash
 nvim /etc/pve/lxc/113.conf
@@ -46,7 +50,7 @@ and add the following line:
 mp0: /mnt/immich-media/,mp=/mnt/immich-media
 ```
 
-#### 3. inside the new LXC container run
+#### 3. Inside the new LXC container run
 
 ```bash
 pct start 113
@@ -55,6 +59,8 @@ pct start 113
 #### 4. Set `/mnt/immich-media/` as the location for uploads of the Immich container
 
 The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+
+<div style="padding-left: 1.5rem; border-left: 4px solid var(--accent2);">
 
 ##### a. Enter the container
 
@@ -106,19 +112,29 @@ chown -R immich:immich /opt/immich
 systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
 ```
 
-##### i. Optional: once the app is confirmed to be working the old upload folder can be deleted
+##### i. Optional: delete the old upload folder
+
+Once the app is confirmed to be working the old upload folder can be deleted.
 
 ```bash
 rm -rf /opt/immich/upload
 ```
 
-#### 5. Confirm the Immich app is working by navigating to the URL printed in the log after the container was created, and try uploading some files
+</div>
+
+#### 5. Confirm the Immich app is working
+
+Navigate to the URL printed in the log after the container was created, and try uploading some files.
+
+---
 
 ### Backrest setup
 
 Set up a new LXC using the helper script with default settings: <https://community-scripts.org/scripts/backrest>
 
 LXC id is 114, Backrest is run by the `root` user.
+
+---
 
 ### Giving access to the mount point for both Immich and Backrest
 
@@ -135,13 +151,15 @@ pct stop 114
 groupadd -g 20000 immich-media
 ```
 
-#### 3. change the `/etc/subgid`
+#### 3. Change the `/etc/subgid`
 
 ```bash
 echo 'root:20000:1' >> /etc/subgid
 ```
 
-#### 4. Modify the lxc configs, to both `/etc/pve/lxc/113.conf` and `/etc/pve/lxc/114.conf` add lines
+#### 4. Modify the lxc configs
+
+To both `/etc/pve/lxc/113.conf` and `/etc/pve/lxc/114.conf` add lines:
 
 ```txt
 mp0: /mnt/immich-media,mp=/mnt/immich-media
@@ -179,6 +197,8 @@ pct exec 113 -- su -s /bin/bash immich -c "touch /mnt/immich-media/.test1 && rm 
 pct exec 114 -- bash -c "touch /mnt/immich-media/.test2 && rm /mnt/immich-media/.test2 && echo OK"
 ```
 
+---
+
 ## Backup setup
 
 A prerequisite here is to create an account on Backblaze.
@@ -201,6 +221,8 @@ Backup plan config:
 
 Note: I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
 
+---
+
 ### Creating Immich database dump
 
 Before creating a backup snapshot it is crucial to include an up-to-date database snapshot too. I do it using the Backrest backup plan feature called Hooks. You can already see them in the JSON configs above.
@@ -209,7 +231,7 @@ Before creating a backup snapshot it is crucial to include an up-to-date databas
 
 The problem is that I want to create a db dump as part of the Backrest workflow, but the db is in the Immich container, so I had to come up with a way to communicate from Backrest to Immich to invoke the creation of the db snapshot. Since both containers are unprivileged, I chose to use `ssh`.
 
-##### Step 1 - Install SSH Server on LXC 113
+##### 1. Install SSH Server on LXC 113
 
 ```bash
 pct exec 113 -- bash -c "apt update && apt install -y openssh-server"
@@ -219,13 +241,13 @@ pct exec 113 -- bash -c "apt update && apt install -y openssh-server"
 pct exec 113 -- systemctl enable --now ssh
 ```
 
-##### Step 2 - Install SSH Client on LXC 114
+##### 2. Install SSH Client on LXC 114
 
 ```bash
 pct exec 114 -- bash -c "apt update && apt install -y openssh-client"
 ```
 
-##### Step 3 - Generate SSH Key on LXC 114
+##### 3. Generate SSH Key on LXC 114
 
 ```bash
 pct exec 114 -- ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519_lxc_shared -N ""
@@ -233,7 +255,7 @@ pct exec 114 -- ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519_lxc_shared -N ""
 
 The `root@backrest` comment at the end of the public key is just a label - SSH ignores it during authentication.
 
-##### Step 4 - Copy Public Key to LXC 113
+##### 4. Copy Public Key to LXC 113
 
 Get the public key:
 
@@ -256,7 +278,7 @@ pct exec 113 -- chmod 700 /root/.ssh
 pct exec 113 -- chmod 600 /root/.ssh/authorized_keys
 ```
 
-##### Step 5 - Lock Down SSH on LXC 113
+##### 5. Lock Down SSH on LXC 113
 
 Edit `/etc/ssh/sshd_config` inside LXC 113, add:
 
@@ -271,7 +293,7 @@ Restart SSH:
 pct exec 113 -- systemctl restart ssh
 ```
 
-##### Step 6 - Create SSH Config on LXC 114
+##### 6. Create SSH Config on LXC 114
 
 Create `/root/.ssh/config` inside LXC 114:
 
@@ -288,13 +310,13 @@ Set permissions:
 pct exec 114 -- chmod 600 /root/.ssh/config
 ```
 
-##### Step 7 - Test SSH Connection
+##### 7. Test SSH Connection
 
 ```bash
 pct exec 114 -- ssh -o StrictHostKeyChecking=accept-new immich echo "SSH OK"
 ```
 
-##### Step 8 - Test Running Scripts Remotely
+##### 8. Test Running Scripts Remotely
 
 ```bash
 pct exec 114 -- ssh immich /usr/local/bin/immich-backup-pre.sh
@@ -303,6 +325,8 @@ pct exec 114 -- ssh immich /usr/local/bin/immich-backup-pre.sh
 ```bash
 pct exec 114 -- ssh immich /usr/local/bin/immich-backup-post.sh
 ```
+
+---
 
 #### Pre-backup hook configuration
 
@@ -399,6 +423,8 @@ log "Backup preparation complete"
 
 ```
 
+---
+
 #### Post-backup hook configuration
 
 Runs after the snapshot finishes, on both failure and success. It's only there to restart the services that the `pre hook` stopped.  It is set up in the Backrest UI.
@@ -483,6 +509,8 @@ log "All services recovered successfully"
 
 ```
 
+---
+
 ## Full backup restore procedure
 
 ### 1. Download the backup from `backrest` to `/mnt/immich-media/test-backup/`
@@ -516,7 +544,7 @@ Using the helper script: <https://community-scripts.org/scripts/immich>,
 pct stop 115
 ```
 
-### 6. in the config of new lxc container add mount point and id mappings
+### 6. In the config of new lxc container add mount point and id mappings
 
 ```bash
 nvim /etc/pve/lxc/115.conf
@@ -533,7 +561,7 @@ lxc.idmap: g 20000 20000 1
 lxc.idmap: g 20001 120001 45535
 ```
 
-### 7. inside the new LXC container run
+### 7. Inside the new LXC container run
 
 ```bash
 pct start 115
@@ -547,14 +575,17 @@ pct exec 115 -- bash -c "groupadd -g 20000 sharedmedia && usermod -aG sharedmedi
 pct reboot 115
 ```
 
-### 8. Set `/mnt/immich-media/test-backup/immich-media/` as the location for uploads of new Immich container
+### 8. Set the upload location for new Immich container
+
+Set `/mnt/immich-media/test-backup/immich-media/` as the location for uploads.
 
 Steps taken from official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+
+<div style="padding-left: 1.5rem; border-left: 4px solid var(--accent2);">
 
 #### a. Enter the new container
 
 ```bash
-
 pct enter 115
 ```
 
@@ -602,6 +633,8 @@ chown -R immich:immich /opt/immich
 systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
 ```
 
+</div>
+
 ### 9. The backup contains DB dump
 
 New immich instance should be able to be initialized using this db dump. <https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding>
@@ -632,6 +665,8 @@ The learnings from the first full restore test, that are already included in the
 #### Second restore test
 
 The second test used a backup from Immich version 2.7.5 and restored it to a new Immich instance in LXC 115 running version 3.0.1, because there was a major update the day before the test. I was a bit nervous, but following this guide 1:1 the restore worked flawlessly.
+
+---
 
 ## Monitoring the backup
 
@@ -686,6 +721,6 @@ With this setup, if any operation fails I will know to open Backrest and investi
 
 Note: And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here.
 
-## Periodic restore testing
+### Periodic restore testing
 
 Plan to run this restore procedure every 3 months or so. The monitoring notifies me about failures, but it also might fail. The whole backrest container might fail. Also, a full restore test is the only way to catch silent data corruption before it's too late.
