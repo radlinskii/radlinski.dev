@@ -68,7 +68,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 16px;
     font-family: IosevkaTermNerdFontPropo, monospace;
     line-height: 1.4;
 }
@@ -96,6 +96,47 @@ h6 {
     margin: 0 0 1rem;
     line-height: 1.2;
     color: var(--fg-color1);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    margin-top: 2rem;
+}
+
+.prose {
+    font-size: 1rem;
+}
+
+.prose h1 {
+    font-size: 2.5rem;
+}
+
+.prose h2 {
+    font-size: 1.75rem;
+}
+
+.prose h3 {
+    font-size: 1.5rem;
+}
+
+.prose h4 {
+    font-size: 1.25rem;
+}
+
+.prose h5 {
+    font-size: 1.125rem;
+}
+
+.prose pre {
+    font-size: 0.875rem;
+}
+
+.prose code {
+    font-size: 0.875rem;
 }
 
 h1 {
@@ -136,10 +177,6 @@ p {
     margin-top: 1rem;
 }
 
-.prose p {
-    margin-bottom: 2rem;
-}
-
 textarea {
     width: 100%;
     font-size: 1rem;
@@ -178,7 +215,6 @@ blockquote {
     border-left: 4px solid var(--accent2);
     padding: 0 0 0 20px;
     margin: 0;
-    font-size: 0.9rem;
     line-height: 1.1;
 }
 

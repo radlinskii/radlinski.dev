@@ -11,6 +11,7 @@ heroImageAlt: "My Mecha Basilisk ergonomic keyboard"
 ## An unexpected journey
 
 What started as a simple attempt to reduce wrist pain quickly turned into an exploration of how much the keyboard - something we barely think about - shapes comfort, speed, and even joy while typing.
+
 I expected to buy one ergonomic keyboard and move on with my life.
 Instead, I accidentally picked up a new hobby and new skills, like soldering and even CAD design.
 
@@ -19,7 +20,7 @@ Be sure to check out the other two posts in my "ergonomic typing" series: the <a
 
 ## How it started
 
-I was using the built-in MacBook keyboard together with Apple's Magic Keyboard when I started my career as a programmer.
+I was using the built-in MacBook keyboard together with Apple's Magic Keyboard when I started my career as a Software Engineer.
 Then I started having pain in my wrists and I began looking for an ergonomic keyboard on the internet.
 
 ![Apple Magic Keyboard](../../assets/posts/ergonomic-keyboard/magic_keyboard.jpeg)

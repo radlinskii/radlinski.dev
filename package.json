@@ -7,7 +7,7 @@
         "lint:format:fix": "prettier --write .",
         "lint:style": "stylelint '**/*.{scss,astro}'",
         "lint:style:fix": "stylelint --fix '**/*.{scss,astro}'",
-        "lint:code": "eslint --fix 'src/**/*.{js,ts,astro}'",
+        "lint:code": "eslint 'src/**/*.{js,ts,astro}'",
         "lint:code:fix": "eslint --fix 'src/**/*.{js,ts,astro}'",
         "dev": "astro dev",
         "start": "astro dev",
