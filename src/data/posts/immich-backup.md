@@ -28,13 +28,13 @@ Create new LXC for new Immich instance using the helper script: <https://communi
 
 LXC id is `113`, Immich services are running by the `immich` user.
 
-1. Stop the container after it is installed
+#### 1. Stop the container after it is installed
 
 ```bash
 pct stop 113
 ```
 
-1. in the config of new lxc container add the mount point
+#### 2. in the config of new lxc container add the mount point
 
 ```bash
 nvim /etc/pve/lxc/113.conf
@@ -46,54 +46,74 @@ nvim /etc/pve/lxc/113.conf
 mp0: /mnt/immich-media/,mp=/mnt/immich-media
 ```
 
-1. inside the new LXC container run:
+#### 3. inside the new LXC container run
 
 ```bash
 pct start 113
 ```
 
-1. Set `/mnt/immich-media/` as the location for uploads of the  Immich container. The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
-1. enter the container
+#### 4. Set `/mnt/immich-media/` as the location for uploads of the Immich container
 
-    ```bash
+The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+
+##### a. Enter the container
+
+```bash
 
 pct enter 113
-    ```
-2. stop the immich app services
-    ```bash
+```
+
+##### b. Stop the Immich app services
+
+```bash
 systemctl stop immich-web immich-ml
-    ```
-3. open env file
-    ```bash
+```
+
+##### c. Open `.env` file
+
+```bash
 vi /opt/immich/.env
-    ```
-4. change the location env var
-    ```
+```
+
+##### d. Change the upload location
+
+```txt
 IMMICH_MEDIA_LOCATION=/mnt/immich-media
-    ```
-5. remove old symlinks created by the helper script
-    ```bash
+```
+
+##### e. Remove old symbolic links created by the helper script
+
+```bash
 rm /opt/immich/app/upload
 rm /opt/immich/app/machine-learning/upload
-    ```
-6. create new symlinks
-    ```bash
+```
+
+##### f. Create new symbolic links
+
+```bash
 ln -sf /mnt/immich-media /opt/immich/app/upload
 ln -sf /mnt/immich-media /opt/immich/app/machine-learning/upload
-    ```
-7. ensure the ownership of the `immich` folder
-    ```bash
+```
+
+##### g. Ensure the ownership of the `immich` folder
+
+```bash
 chown -R immich:immich /opt/immich
-    ```
-8. restart the app services and preview logs
-    ```bash
+```
+
+##### h. Restart the app services and preview logs
+
+```bash
 systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
-    ```
-9.  Optional: once the app is confirmed to be working the old upload folder can be deleted
-    ```bash
+```
+
+##### i. Optional: once the app is confirmed to be working the old upload folder can be deleted
+
+```bash
 rm -rf /opt/immich/upload
-    ```
-5. Confirm Immich app is working by navigating to the url printed in the log after the container was created and e.g. uploading some files there.
+```
+
+#### 5. Confirm the Immich app is working by navigating to the url printed in the log after the container was created and e.g. uploading some files there
 
 ### Backrest setup
 
@@ -103,26 +123,26 @@ LXC id is 114, backrest is running by the `root` user.
 
 ### Giving access to the mount point for both Immich and Backrest
 
-1. stop both services from running
+#### 1. Stop both services from running
 
 ```bash
 pct stop 113
 pct stop 114
 ```
 
-1. created group:
+#### 2. Create group
 
 ```bash
 groupadd -g 20000 immich-media
 ```
 
-1. change the `/etc/subgid`
+#### 3. change the `/etc/subgid`
 
 ```bash
 echo 'root:20000:1' >> /etc/subgid
 ```
 
-1. modify the lxc configs, to both `/etc/pve/lxc/113.conf` and `/etc/pve/lxc/114.conf` add lines:
+#### 4. Modify the lxc configs, to both `/etc/pve/lxc/113.conf` and `/etc/pve/lxc/114.conf` add lines
 
 ```txt
 mp0: /mnt/immich-media,mp=/mnt/immich-media
@@ -133,7 +153,7 @@ lxc.idmap: g 20000 20000 1
 lxc.idmap: g 20001 120001 45535
 ```
 
-1. Set filesystem permissions on the host:
+#### 5. Set filesystem permissions on the host
 
 ```bash
 chgrp -R 20000 /mnt/immich-media
@@ -142,7 +162,7 @@ find /mnt/immich-media -type d -exec chmod g+s {} +
 setfacl -R -d -m g:20000:rwX /mnt/immich-media
 ```
 
-1. create the group and add service users inside each container
+#### 6. Create the group and add service users inside each container
 
 ```bash
 pct start 113
@@ -153,7 +173,7 @@ pct reboot 113
 pct reboot 114
 ```
 
-1. verify the access rights
+#### 7. Verify the access rights
 
 ```bash
 pct exec 113 -- su -s /bin/bash immich -c "touch /mnt/immich-media/.test1 && rm /mnt/immich-media/.test1 && echo OK"
@@ -283,9 +303,7 @@ pct exec 114 -- ssh immich /usr/local/bin/immich-backup-pre.sh
 pct exec 114 -- ssh immich /usr/local/bin/immich-backup-post.sh
 ```
 
----
-
-#### Pre-backup Backrest hook
+#### Pre-backup hook configuration
 
 Used for creating database dump as part of the backup snapshot. To make sure the database is in sync with the files I stop the Immich services to ensure there are no operations happening by any user during the creation of the backup.  It is set up in the Backrest UI.
 Runs on event: `CONDITION_SNAPSHOT_START` added in the Backrest Plan.  It is a `Command` hook, with `ON_ERROR_FATAL` error behavior, because I don't want to create a backup if it fails.
@@ -380,7 +398,7 @@ log "Backup preparatoin complete"
 
 ```
 
-#### Post-backup Backrest hook
+#### Post-backup hook configuration
 
 Runs after the snapshot finishes. On both failure and success. It's only there to restart the services that the `pre hook` stopped.  It is set up in the Backrest UI.
 
@@ -466,36 +484,44 @@ log "All services recovered successfully"
 
 ## Full backup restore procedure
 
-1. download backup the `backrest` to  `/mnt/immich-media/backup-test/2` or something
-2. After the files are downloaded check the permissions, they should operate on the group `immich-media` with gid `20000` so group should have `rwx` permissions set when doing doing `ls`.  Also you can use `getfacl` to see the default ACL, it should be there in place already
+### 1. Download the backup from `backrest` to `/mnt/immich-media/test-backup/`
 
-- in case permissions are wrong, run (on the host):
+### 2. After the files are downloaded check the permissions
+
+They should operate on the group `immich-media` with gid `20000` so group should have `rwx` permissions set when doing `ls`. Also you can use `getfacl` to see the default ACL, it should be there in place already.
+
+In case permissions are wrong, run (on the host):
 
 ```bash
 chmod -R g+rwX /mnt/immich-media/test-backup2
 setfacl -R -d -m g:20000:rwX /mnt/immich-media/test-backup2
 ```
 
-1. Check the exact path of the immich directories, during the test it was
+### 3. Check the exact path of the immich directories
+
+During the test it was:
 
 ```txt
 /mnt/immich-media/test-backup2/immich-media/
 ```
 
-1. Create new LXC for new Immich instance using the helper script: <https://community-scripts.org/scripts/immich>,
-2. Stop the container after it is installed
+### 4. Create new LXC for new Immich instance
+
+Using the helper script: <https://community-scripts.org/scripts/immich>,
+
+### 5. Stop the container after it is installed
 
 ```bash
 pct stop 115
 ```
 
-1. in the config of new lxc container add mount point and  id mappings
+### 6. in the config of new lxc container add mount point and id mappings
 
 ```bash
 nvim /etc/pve/lxc/115.conf
 ```
 
-   and add:
+and add:
 
 ```txt
 mp0: /mnt/immich-media/test-backup2/immich-media/,mp=/mnt/immich-media
@@ -506,7 +532,7 @@ lxc.idmap: g 20000 20000 1
 lxc.idmap: g 20001 120001 45535
 ```
 
-1. inside the new LXC container run:
+### 7. inside the new LXC container run
 
 ```bash
 pct start 115
@@ -520,55 +546,71 @@ pct exec 115 -- bash -c "groupadd -g 20000 sharedmedia && usermod -aG sharedmedi
 pct reboot 115
 ```
 
-1. Set `/mnt/immich-media/test-backup2/immich-media/` as the location for uploads of new Immich container. Steps taken from official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
-1. enter the cotainer
+### 8. Set `/mnt/immich-media/test-backup/immich-media/` as the location for uploads of new Immich container
 
-    ```bash
+Steps taken from official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+
+#### a. Enter the new container
+
+```bash
 
 pct enter 115
-    ```
-2. stop the immich app services
-    ```bash
+```
+
+#### b. Stop Immich
+
+```bash
 systemctl stop immich-web immich-ml
-    ```
-3. open env file
-    ```bash
+```
+
+#### c. Open .env file
+
+```bash
 vi /opt/immich/.env
-    ```
-4. change the location env var
-    ```
+```
+
+#### d. Change the location env var
+
+```txt
 IMMICH_MEDIA_LOCATION=/mnt/immich-media
-    ```
-5. remove old symlinks created by the helper script
-    ```bash
+```
+
+#### e. Remove old symlinks
+
+```bash
 rm /opt/immich/app/upload
 rm /opt/immich/app/machine-learning/upload
-    ```
-6. create new symlinks
-    ```bash
+```
+
+#### f. Create new symlinks
+
+```bash
 ln -sf /mnt/immich-media /opt/immich/app/upload
 ln -sf /mnt/immich-media /opt/immich/app/machine-learning/upload
-    ```
-7. ensure the ownership of the `immich` folder
-    ```bash
-chown -R immich:immich /opt/immich
-    ```
-8. restart the app services and preview logs
-    ```bash
-systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
-    ```
-9.  Optional: once the app is confirmed to be working the old upload folder can be deleted
-    ```bash
-rm -rf /opt/immich/upload
-    ```
-8. The backup contains DB dump. New immich instance should be able to be initialized using this db dump. <https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding>
+```
 
-### First restore test
+#### g. Ensure the ownership of the `immich` directory
+
+```bash
+chown -R immich:immich /opt/immich
+```
+
+#### h. Restart the app and preview its logs
+
+```bash
+systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
+```
+
+### 9. The backup contains DB dump
+
+New immich instance should be able to be initialized using this db dump. <https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding>
+
+#### First restore test
 
 The learnings from the first full restore test, that are already included in the notes above, so feel free to ignore them.
 
 1. After backup is downloaded correct rights for group were not there.
-   > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯.
+   > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
 
 2. IMO it's better to backup all *Immich related* directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead during e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
    > UPDATED the Backrest plan to include those directories.
@@ -577,7 +619,7 @@ The learnings from the first full restore test, that are already included in the
     The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
     > UPDATED the Pre-backup hook script
 
-### Second restore test
+#### Second restore test
 
 Second test was using a backup from Immich version 2.7.5 and a new Immich instance in LXC 115 with version 3.0.1, because there was a major update the day before the test. I was a bit nervous, but following this guide 1:1 this test worked flawlessly.
 
