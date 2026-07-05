@@ -28,7 +28,7 @@ I will assume the mount point is already created and available at `/mnt/immich-m
 
 ### Immich setup
 
-Create a new LXC for a new Immich instance using the helper script: <https://community-scripts.org/scripts/immich>,
+Create a new LXC for a new Immich instance using the helper script: [community-scripts.org/scripts/immich](https://community-scripts.org/scripts/immich),
 
 LXC id is `113`, Immich services are run by the `immich` user.
 
@@ -58,7 +58,7 @@ pct start 113
 
 #### 4. Set `/mnt/immich-media/` as the location for uploads of the Immich container
 
-The following steps are taken from the official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+The following steps are taken from the official guide of the Immich LXC Helper Script - [GitHub discussion](https://github.com/community-scripts/ProxmoxVE/discussions/5075)
 
 <div style="padding-left: 1.5rem; border-left: 4px solid var(--accent2);">
 
@@ -130,7 +130,7 @@ Navigate to the URL printed in the log after the container was created, and try 
 
 ### Backrest setup
 
-Set up a new LXC using the helper script with default settings: <https://community-scripts.org/scripts/backrest>
+Set up a new LXC using the helper script with default settings: [community-scripts.org/scripts/backrest](https://community-scripts.org/scripts/backrest)
 
 LXC id is 114, Backrest is run by the `root` user.
 
@@ -205,7 +205,7 @@ A prerequisite here is to create an account on Backblaze.
 
 ### Backrest plan and repository setup
 
-I followed the guide here: <https://www.linuxserver.io/blog/backup-your-data-to-b2-with-restic-and-backrest> to set up the backup plan and `restic` repository on Backblaze B2. I won't copy its instructions, but thanks to the Backrest UI I can easily show the end result in JSON format. Using the JSON configs and the guide above, the UI configuration can be replicated easily enough.
+I followed the guide here: [linuxserver.io blog](https://www.linuxserver.io/blog/backup-your-data-to-b2-with-restic-and-backrest) to set up the backup plan and `restic` repository on Backblaze B2. I won't copy its instructions, but thanks to the Backrest UI I can easily show the end result in JSON format. Using the JSON configs and the guide above, the UI configuration can be replicated easily enough.
 
 Repository config:
 
@@ -330,8 +330,8 @@ pct exec 114 -- ssh immich /usr/local/bin/immich-backup-post.sh
 
 #### Pre-backup hook configuration
 
-Used for creating database dump as part of the backup snapshot. To make sure the database is in sync with the files I stop the Immich services to ensure there are no operations happening by any user during the creation of the backup.  It is set up in the Backrest UI.
-Runs on event: `CONDITION_SNAPSHOT_START` added in the Backrest Plan.  It is a `Command` hook, with `ON_ERROR_FATAL` error behavior, because I don't want to create a backup if it fails.
+Used for creating database dump as part of the backup snapshot. To make sure the database is in sync with the files I stop the Immich services to ensure there are no operations happening by any user during the creation of the backup. It is set up in the Backrest UI.
+Runs on event: `CONDITION_SNAPSHOT_START` added in the Backrest Plan. It is a `Command` hook, with `ON_ERROR_FATAL` error behavior, because I don't want to create a backup if it fails.
 
 The command itself is just one line:
 
@@ -427,9 +427,9 @@ log "Backup preparation complete"
 
 #### Post-backup hook configuration
 
-Runs after the snapshot finishes, on both failure and success. It's only there to restart the services that the `pre hook` stopped.  It is set up in the Backrest UI.
+Runs after the snapshot finishes, on both failure and success. It's only there to restart the services that the `pre hook` stopped. It is set up in the Backrest UI.
 
-Runs on event: `CONDITION_SNAPSHOT_END` added in the Backrest Plan.  It is a `Command` hook, with `ON_ERROR_RETRY_10MINUTES` error behavior.
+Runs on event: `CONDITION_SNAPSHOT_END` added in the Backrest Plan. It is a `Command` hook, with `ON_ERROR_RETRY_10MINUTES` error behavior.
 
 This command is also a one-liner:
 
@@ -536,7 +536,7 @@ During the test it was:
 
 ### 4. Create new LXC for new Immich instance
 
-Using the helper script: <https://community-scripts.org/scripts/immich>,
+Using the helper script: [community-scripts.org/scripts/immich](https://community-scripts.org/scripts/immich),
 
 ### 5. Stop the container after it is installed
 
@@ -579,7 +579,7 @@ pct reboot 115
 
 Set `/mnt/immich-media/test-backup/immich-media/` as the location for uploads.
 
-Steps taken from official guide of the Immich LXC Helper Script - <https://github.com/community-scripts/ProxmoxVE/discussions/5075>
+Steps taken from official guide of the Immich LXC Helper Script - [GitHub discussion](https://github.com/community-scripts/ProxmoxVE/discussions/5075)
 
 <div style="padding-left: 1.5rem; border-left: 4px solid var(--accent2);">
 
@@ -637,7 +637,7 @@ systemctl start immich-ml immich-web && tail -f /var/log/immich/web.log
 
 ### 9. The backup contains DB dump
 
-New immich instance should be able to be initialized using this db dump. <https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding>
+New immich instance should be able to be initialized using this db dump. [Immich restore docs](https://docs.immich.app/administration/backup-and-restore/#restore-from-onboarding)
 
 ### 10. Verify the restore
 
@@ -653,13 +653,15 @@ Once the app is running, confirm the restore worked:
 The learnings from the first full restore test, that are already included in the notes above, so feel free to ignore them.
 
 1. After the backup was downloaded, the correct group permissions were not set.
-   > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
 
-2. IMO it's better to back up all *Immich-related* directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
-   > UPDATED the Backrest plan to include those directories.
+    > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
+
+2. IMO it's better to back up all _Immich-related_ directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
+
+    > UPDATED the Backrest plan to include those directories.
 
 3. The db_dump had an "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory and let it be one of the files backed up there - it will always be the most recent one.
-    The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
+   The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
     > UPDATED the Pre-backup hook script
 
 #### Second restore test
