@@ -1,7 +1,7 @@
 ---
 title: "Immich Backup and restore guide"
-description: "Guide for setting up Immich backup and walkthrough of using it to restore the service from the backup."
-tldr: "Walkthrough of creating full backup for Immich and then how to test that the backup works"
+description: "Step-by-step guide for setting up automated Immich backups with Backrest and Backblaze B2, including full restore testing, database dump coordination via SSH, and monitoring with Home Assistant."
+tldr: "Immich backup with Backrest with Home Assistant failure notifications sending data to Backblaze B2 from separate containers with shared mount point."
 pubDate: 2026-07-14
 updatedDate: 2026-07-15
 heroImage: "/posts/ergonomic-keyboard/mechabasilisk_3.jpeg"
@@ -40,7 +40,7 @@ pct stop 113
 nvim /etc/pve/lxc/113.conf
 ```
 
-   and add:
+and add the following line:
 
 ```txt
 mp0: /mnt/immich-media/,mp=/mnt/immich-media
@@ -59,7 +59,6 @@ The following steps are taken from the official guide of the Immich LXC Helper S
 ##### a. Enter the container
 
 ```bash
-
 pct enter 113
 ```
 
@@ -200,7 +199,7 @@ Backup plan config:
 `{ "id": "my-immich-backup-daily", "repo": "immich-backup", "paths": [ "/mnt/immich-media/backups", "/mnt/immich-media/encoded-video", "/mnt/immich-media/library", "/mnt/immich-media/profile", "/mnt/immich-media/thumbs", "/mnt/immich-media/upload" ], "excludes": [], "retention": { "policyTimeBucketed": { "hourly": 24, "daily": 30, "weekly": 0, "monthly": 12, "yearly": 0, "keepLastN": 0 } }, "hooks": [ { "conditions": [ "CONDITION_SNAPSHOT_START" ], "onError": "ON_ERROR_FATAL", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-pre.sh" } }, { "conditions": [ "CONDITION_SNAPSHOT_END" ], "onError": "ON_ERROR_RETRY_10MINUTES", "actionCommand": { "command": "ssh immich /usr/local/bin/immich-backup-post.sh" } } ], "iexcludes": [], "backup_flags": [], "schedule": { "cron": "0 3 * * *", "clock": "CLOCK_LOCAL" }, "skipIfUnchanged": false }`
 ```
 
-> I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
+Note: I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
 
 ### Creating Immich database dump
 
@@ -316,7 +315,7 @@ The command itself is just one line:
 ssh immich /usr/local/bin/immich-backup-pre.sh
 ```
 
-> After the first attempt of doing the restore I had to modify the script to make sure the db dump file has correct name that Immich expects. I think the timestamp and the app and postgres versions parts are the most important there.
+Note: After the first attempt of doing the restore I had to modify the script to make sure the db dump file has correct name that Immich expects. I think the timestamp and the app and postgres versions parts are the most important there.
 
 #### Pre-backup hook script
 
@@ -428,7 +427,7 @@ Content:
 
 ```bash
 #!/bin/bash
-# -e intentionally omitted — errors are handled via $ERRORS below
+# -e intentionally omitted - errors are handled via $ERRORS below
 set -uo pipefail
 
 # logging helper
@@ -490,7 +489,7 @@ log "All services recovered successfully"
 
 ### 2. After the files are downloaded check the permissions
 
-They should be set to the group `immich-media` with gid `20000` — the group should have `rwx` permissions when you run `ls`. Also you can use `getfacl` to see the default ACL, it should be there in place already.
+They should be set to the group `immich-media` with gid `20000` - the group should have `rwx` permissions when you run `ls`. Also you can use `getfacl` to see the default ACL, it should be there in place already.
 
 In case permissions are wrong, run (on the host):
 
@@ -523,7 +522,7 @@ pct stop 115
 nvim /etc/pve/lxc/115.conf
 ```
 
-and add:
+and add the following:
 
 ```txt
 mp0: /mnt/immich-media/test-backup/immich-media/,mp=/mnt/immich-media
@@ -612,7 +611,7 @@ New immich instance should be able to be initialized using this db dump. <https:
 Once the app is running, confirm the restore worked:
 
 - Log in with your existing admin credentials
-- Browse to a known album or timeline — previously uploaded photos and videos should be visible
+- Browse to a known album or timeline - previously uploaded photos and videos should be visible
 - Check that user accounts are intact under Administration → Users
 - If you spot test/placeholder albums from the fresh install, delete them
 
@@ -623,10 +622,10 @@ The learnings from the first full restore test, that are already included in the
 1. After the backup was downloaded, the correct group permissions were not set.
    > Would be nice to fix it somehow, but can also be adjusted manually so `¯\_(ツ)_/¯`.
 
-2. IMO it's better to back up all *Immich-related* directories (even /backups, /thumbs/ and /encoded-video) — I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
+2. IMO it's better to back up all *Immich-related* directories (even /backups, /thumbs/ and /encoded-video) - I don't care so much about the space, I care more about the server overhead of e.g. transcoding all videos again. Also, when starting the new LXC the app expected /encoded-video and /thumbs directories to be there, and it was failing.
    > UPDATED the Backrest plan to include those directories.
 
-3. The db_dump had an "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory and let it be one of the files backed up there — it will always be the most recent one.
+3. The db_dump had an "unrecognized version" error, and couldn't be used at first to restore the app. I had to rename it. Also, it's better to put it in the /backups directory and let it be one of the files backed up there - it will always be the most recent one.
     The name that worked for me: `"uploaded-custom-immich-db-backup-20260703T190154-v2.7.5-pg16.14.sql.gz"`.
     > UPDATED the Pre-backup hook script
 
@@ -685,7 +684,7 @@ curl -s -X POST http://<home assistant ip>/api/webhook/<webhook id> \
 
 With this setup, if any operation fails I will know to open Backrest and investigate.
 
-> And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here. I will probably also create some periodic notification e.g. once a quarter to check the backups in Backrest in case this "monitoring system fails."
+Note: And they all have `ON_ERROR_IGNORE` error behavior, because well, that's the deepest I want to go for monitoring here.
 
 ## Periodic restore testing
 
