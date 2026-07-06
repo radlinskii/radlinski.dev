@@ -3,6 +3,7 @@ title: "Setup Immich with backup and verify recovery"
 description: "Step-by-step guide for setting up automated Immich backups with Backrest and Backblaze B2, including full restore testing, database dump coordination via SSH, and monitoring with Home Assistant."
 tldr: "Immich backup with Backrest with Home Assistant failure notifications sending data to Backblaze B2 from separate containers with shared mount point."
 pubDate: 2026-07-05
+updatedDate: 2026-07-06
 heroImage: "/posts/immich-backup/immich-backup.jpg"
 heroImageAlt: "Immich backup setup diagram"
 ---
@@ -269,6 +270,7 @@ Backup plan config:
     "repo": "immich-backup",
     "paths": [
         "/mnt/immich-media/backups",
+        "/mnt/immich-media/dotenv",
         "/mnt/immich-media/encoded-video",
         "/mnt/immich-media/library",
         "/mnt/immich-media/profile",
@@ -296,8 +298,6 @@ Backup plan config:
     "skipIfUnchanged": false
 }
 ```
-
-Note: I'm not backing up the `.env` file deliberately. If I make more changes to it beyond just the upload location, I might start backing it up - likely by adding it to the paths list in the pre-script where all the directories are listed. However, right now the upload location change requires making other changes manually anyway so I might as well update the `.env` file.
 
 ---
 
@@ -445,6 +445,8 @@ Content:
 #!/bin/bash
 set -euo pipefail
 
+# Those variables come from /opt/immich/.env file in the original Immich container
+# or from /mnt/immich-media/dotenv/.env from backup
 DUMP_DIR="/mnt/immich-media/backups"
 PG_USER="immich"
 PG_PASS=":-)"
@@ -457,6 +459,11 @@ log() {
 }
 
 log "Starting Immich backup preparation"
+
+# Ensure dotenv directory exists and back up the .env file
+mkdir -p /mnt/immich-media/dotenv
+cp /opt/immich/.env /mnt/immich-media/dotenv/.env
+log "Backed up .env to /mnt/immich-media/dotenv/.env"
 
 # Stop Immich services
 log "Stopping Immich services..."
@@ -476,7 +483,9 @@ PG_VERSION_RAW=$(sudo -u postgres psql -qtAX -c "SHOW server_version;")
 PG_VERSION=$(echo "$PG_VERSION_RAW" | grep -oE '^[0-9]+\.[0-9]+')
 PG_TAG="pg${PG_VERSION}"
 
-DUMP_FILENAME="uploaded-custom-immich-db-backup-${TIMESTAMP}-v${IMMICH_VERSION}-${PG_TAG}.sql.gz"
+# The `uploaded-` prefix is what Immich expects, don't change it
+DUMP_PREFIX="uploaded-custom-immich-db-backup"
+DUMP_FILENAME="${DUMP_PREFIX}-${TIMESTAMP}-v${IMMICH_VERSION}-${PG_TAG}.sql.gz"
 DUMP_FILE="$DUMP_DIR/$DUMP_FILENAME"
 DUMP_TMP="$DUMP_DIR/$DUMP_FILENAME.tmp"
 
@@ -491,6 +500,10 @@ fi
 # Atomic move into place
 mv "$DUMP_TMP" "$DUMP_FILE"
 log "Database dump saved to $DUMP_FILE ($(du -h "$DUMP_FILE" | cut -f1))"
+
+# Remove stale dumps with the same prefix (keep only the current one)
+log "Removing stale database dumps with prefix ${DUMP_PREFIX}..."
+find "$DUMP_DIR" -maxdepth 1 -name "${DUMP_PREFIX}-*.sql.gz" ! -name "$DUMP_FILENAME" -exec rm -v {} \;
 
 # Stop Postgres
 log "stopping PostgreSQL"
