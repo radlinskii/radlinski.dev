@@ -9,6 +9,8 @@
         "lint:style:fix": "stylelint --fix '**/*.{scss,astro}'",
         "lint:code": "eslint 'src/**/*.{js,ts,astro}'",
         "lint:code:fix": "eslint --fix 'src/**/*.{js,ts,astro}'",
+        "lint": "npm run lint:code && npm run lint:format && npm run lint:style",
+        "lint:fix": "npm run lint:code:fix && npm run lint:format:fix && npm run lint:style:fix",
         "dev": "astro dev",
         "start": "astro dev",
         "build": "astro check && astro build",
