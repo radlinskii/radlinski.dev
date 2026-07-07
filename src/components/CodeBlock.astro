@@ -2,12 +2,15 @@
 const { class: className, ...props } = Astro.props;
 ---
 
-<pre
-    class:list={[className]}
-    {...props}><slot /><button type="button" class="copy-btn" title="Copy code to clipboard">copy</button></pre>
+<div class="code-block-wrapper">
+    <pre class:list={[className]} {...props}><slot /></pre>
+    <button type="button" class="copy-btn" title="Copy code to clipboard"
+        >copy</button
+    >
+</div>
 
 <style>
-    pre {
+    .code-block-wrapper {
         position: relative;
     }
 
@@ -21,14 +24,14 @@ const { class: className, ...props } = Astro.props;
         background: rgb(128 128 128 / 12%);
         border: 1px solid rgb(128 128 128 / 25%);
         border-radius: 4px;
-        color: inherit;
+        color: #fff;
         font-family: inherit;
-        font-size: 0.7rem;
+        font-size: 1rem;
         padding: 2px 8px;
         line-height: 1.4;
     }
 
-    pre:hover .copy-btn,
+    .code-block-wrapper:hover .copy-btn,
     .copy-btn:focus-visible {
         opacity: 1;
     }
@@ -72,7 +75,8 @@ const { class: className, ...props } = Astro.props;
         if (!btn) return;
         e.preventDefault();
 
-        const pre = btn.closest("pre");
+        const wrapper = btn.closest(".code-block-wrapper");
+        const pre = wrapper?.querySelector("pre");
         const code = pre?.querySelector("code");
         const text = code?.textContent ?? "";
 
