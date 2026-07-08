@@ -51,16 +51,47 @@
     font-style: normal;
     font-weight: 400;
     src:
-        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"), local("ttf");
-    font-display: swap;
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf")
+            format("truetype");
+    font-display: optional;
 }
 
 @font-face {
     font-family: IosevkaTermNerdFontPropo;
     font-style: normal;
     font-weight: 700;
-    src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf"), local("ttf");
-    font-display: swap;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf")
+            format("truetype");
+    font-display: optional;
+}
+
+@font-face {
+    font-family: IosevkaTermNerdFontPropo;
+    font-style: italic;
+    font-weight: 400;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Italic.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Italic.ttf")
+            format("truetype");
+    font-display: optional;
+}
+
+@font-face {
+    font-family: IosevkaTermNerdFontPropo;
+    font-style: italic;
+    font-weight: 700;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-BoldItalic.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-BoldItalic.ttf")
+            format("truetype");
+    font-display: optional;
 }
 
 html,
