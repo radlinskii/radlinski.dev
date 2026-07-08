@@ -88,7 +88,7 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
 
 - **Advanced in**: Javascript and Typescript (Node.js, React.js, Next.js, Electron.js), HTML/CSS, SQL (Postgres)
 - **Familiar with**: Rust, Golang, C++, Java, C, Python, GraphQL
-- **Experienced in**: AWS Cloud, Docker, and various CI/CD as well as App Monitoring services
+- **Experienced in**: AWS Cloud, Docker, various CI/CD and App Monitoring services, and AI-assisted development
 
 ---
 

@@ -1,0 +1,66 @@
+---
+import { Content, frontmatter } from "../data/resume.md";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Divider from "../components/Divider.astro";
+import { SITE_TITLE, SITE_IMAGE } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={frontmatter.title}
+            siteName={SITE_TITLE}
+            description={frontmatter.description}
+            image={SITE_IMAGE}
+        />
+        <style>
+            main {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            article {
+                padding: 3rem 1rem;
+                min-height: calc(100vh - 68px - 82px - 6rem - 2px);
+            }
+
+            .prose {
+                color: var(--fg-color3);
+            }
+
+            @media screen and (width >= 1024px) {
+                .prose {
+                    margin: auto;
+                    width: 980px;
+                    max-width: calc(100% - 2rem);
+                }
+            }
+
+            .content {
+                margin: 0 auto;
+                max-width: 720px;
+            }
+
+            .divider {
+                margin-bottom: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <article>
+                <div class="prose">
+                    <div class="content">
+                        <Divider />
+                        <Content />
+                    </div>
+                </div>
+            </article>
+        </main>
+        <Footer />
+    </body>
+</html>
