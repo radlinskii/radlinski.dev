@@ -1,38 +1,38 @@
 ---
 title: "Resume"
-description: "Senior Software Engineer with 8+ years of experience in full-stack development, specializing in TypeScript, React, Node.js, and Electron.js."
-tldr: "Senior Software Engineer experienced in TypeScript, React, Node.js, and Electron.js. Worked at u-blox, TX Group, and Schibsted."
+description: "Senior Software Engineer with 8+ years of experience across desktop applications, full-stack web, embedded device programming, and self-hosted infrastructure."
+tldr: "Senior Software Engineer with experience across desktop apps, full-stack web, cloud and self-hosted infrastructure, and low-level device programming."
 pubDate: 2026-07-08
-updatedDate: 2026-07-08
 ---
 
 # Ignacy Radliński
 
-Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912
-[ignacy@radlinski.dev](mailto:ignacy@radlinski.dev) • [github.com/radlinskii](https://github.com/radlinskii) • [linkedin.com/in/ignacy-radlinski](https://linkedin.com/in/ignacy-radlinski) • [radlinski.dev](https://radlinski.dev)
+Senior Software Engineer • 8+ years of experience\
+Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlinski.dev](mailto:ignacy@radlinski.dev)\
+[github.com/radlinskii](https://github.com/radlinskii) • [linkedin.com/in/ignacy-radlinski](https://linkedin.com/in/ignacy-radlinski) • [radlinski.dev](https://radlinski.dev)
 
 ---
 
 ## Professional Experience
 
-**Years of experience: 8+**
-
 ### Senior Software Engineer • u-blox AG
 
-*Zürich, Switzerland • Nov 2023 – Present* • *Promoted to Senior in Jan 2026*
+*Zürich, Switzerland • Nov 2023 – Present*
 
-- Developing **u-center 2 Desktop Application** using Electron.js, used by customers for aggregation and visualization of data sent by company's products - GPS receivers
+- Developing **u-center 2 Desktop Application** — a data-intensive Electron.js application used by both customers and the company's R&D team for aggregation and visualization of data sent by company's GPS receivers
 - Working across the development stack, including:
   - React, Redux and RxJS on frontend
   - Electron.js architecture as backend of the desktop app
   - Low-level programming for physical device communication
   - Backend logic and infrastructure for microservices
   - E2E tests of the application
-- Lead the initiative for **AI to become a first-class tool** in the team
-- Heavily focusing on **eliminating performance bottlenecks** for application to be able to handle thousands of incoming events per second
-- Took initiative to **migrate team's CI pipeline from running on-premise to cloud**, heavily improving pipeline build time and maintenance overhead
-- Created a backend service in Nest.js used for storing anonymous user telemetry data that will help understand users' behavior
-- Migrating features from legacy C++ application to the new codebase
+- Heavily focusing on **eliminating performance bottlenecks** for the application to handle thousands of incoming events per second
+- Implemented various features from design to production release, such as **log file playback with filtering controls**
+- Lead the adoption of **AI as a first-class tool** in the team, setting up AI Agent Skills and instructions adopted by the team
+- Lead the initiative to **migrate the team's CI pipeline from on-premise to cloud**, heavily improving build time and reducing maintenance overhead
+- Volunteered to **refactor the end-to-end test suite**, improving reliability and coverage
+- Recognized for taking initiatives and **promoted to Senior Software Engineer** in January 2026
+- Migrated features from legacy C++ application to the new codebase
 
 ### Frontend Software Developer • 20 Minuten / TX Group AG
 
@@ -42,8 +42,8 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912
 - Worked in React.js, Next.js, Node.js and Typescript
 - Designed the setup for **internationalization of the monorepo** of web applications
 - Designed and implemented a refactor of thousands of lines of legacy code
-- Experimented with project that was creating news coverage using Generative AI
-- Joined Backend Team for 3 months to help meet the deadline of migration of CMS and API
+- Experimented with **Generative AI for news coverage**, learning to work with AI through APIs and how data quality is critical for AI-generated content
+- Volunteered to join Backend Team for 3 months to help meet the deadline of migration of CMS and API
 
 ### Full-stack Software Engineer • Schibsted Products and Technology AB
 
@@ -60,14 +60,8 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912
 
 - Worked across the technology stack, from client side in React.js to server in Node.js, to infrastructure held on AWS
 - Co-developed current shape of **tek.no’s** and **gott.no’s** web applications
-- Learned to cooperate with business and design as a developer
+- Collaborated with business stakeholders and designers to translate product requirements into technical solutions
 - Served as a buddy of an intern, who later got an offer at the company
-
-### Software Engineering Intern • Schibsted Tech Polska
-
-*Kraków, Poland • Jul 2018 – Sep 2018*
-
-- Developed web application used internally for monitoring production environment of the teams’ products
 
 ---
 
@@ -94,27 +88,25 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912
 
 - **Advanced in**: Javascript and Typescript (Node.js, React.js, Next.js, Electron.js), HTML/CSS, SQL (Postgres)
 - **Familiar with**: Rust, Golang, C++, Java, C, Python, GraphQL
-- **Experienced in**: AWS Cloud and various CI/CD as well as App Monitoring services
-- **Daily use**: Unix based operating system and git as a version control system
+- **Experienced in**: AWS Cloud, Docker, and various CI/CD as well as App Monitoring services
 
 ---
 
 ## Projects
 
-- Created **typing test as a CLI program** [github/radlinskii/donkeytype](https://github.com/radlinskii/donkeytype), written in Rust
-- Designed in CAD and assembled **custom keyboard** along with its firmware [github/radlinskii/basilisk](https://github.com/radlinskii/basilisk) for ergonomy and efficiency
-- **Interpreter for programming language** - [github/radlinskii/junior-interpreter](https://github.com/radlinskii/junior-interpreter) along with online playground, written in Go
+- Acting as **sysadmin** of my self-hosted **homelab** — my biggest ongoing side project, running services in Proxmox and Linux Containers for smart home automation, media streaming, photo archiving, ad-blocking DNS, VPN and tunneling, automated backups, and monitoring
 - Created a **personal website** [https://radlinski.dev/](https://radlinski.dev/) that is hosted using Cloudflare Pages
+- Designed in CAD and assembled **custom keyboard** along with its firmware [github/radlinskii/basilisk](https://github.com/radlinskii/basilisk) for ergonomy and efficiency
+- Created **typing test as a CLI program** [github/radlinskii/donkeytype](https://github.com/radlinskii/donkeytype), written in Rust
 
 ---
 
 ## Interests
 
+- Homelab development and maintenance
 - Building custom ergonomic mechanical keyboards
-- Ornithology
-- Swimming
-- Hiking
+- Ornithology, hiking, swimming
 
 ---
 
-*I hereby give consent for my personal data included in my offer to be processed for the purposes of recruitment.*
+*I hereby give consent for my personal data included in my application to be processed for the purposes of recruitment.*
