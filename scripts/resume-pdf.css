@@ -1,0 +1,112 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 22pt;
+    margin-bottom: 0.2in;
+}
+
+h2 {
+    font-size: 14pt;
+    margin-top: 0.25in;
+    margin-bottom: 0.1in;
+}
+
+h3 {
+    font-size: 12pt;
+    margin-bottom: 0;
+}
+
+h3 + p {
+    margin-top: 2pt;
+}
+
+p {
+    margin: 0.05in 0;
+}
+
+a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0.05in 0;
+    padding-left: 0.3in;
+}
+
+li {
+    margin-bottom: 2pt;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 0.15in 0;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+blockquote {
+    margin: 0.1in 0;
+    padding-left: 0.15in;
+    border-left: 2px solid #000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.1in 0;
+}
+
+th,
+td {
+    border: 1px solid #000;
+    padding: 4pt;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+img {
+    max-width: 100%;
+}
+
+.consent {
+    /* TODO: would be nice to not have it hardcoded, but still have consent at the bottom of last page */
+    margin-top: 4.5in;
+    text-align: center;
+}
+
+.consent p {
+    font-size: 9pt;
+    font-style: italic;
+}
+
+code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10pt;
+}
+
+pre {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10pt;
+    border: 1px solid #000;
+    padding: 0.1in;
+    overflow-x: auto;
+}

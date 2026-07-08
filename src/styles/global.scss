@@ -17,8 +17,8 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 166, 160, 131;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(97 155 225);
-    --accent2: rgb(225 155 97);
+    --accent1: rgb(100 155 225);
+    --accent2: rgb(225 155 100);
     --box-shadow:
         0 2px 6px rgb(var(--bg-color1-rgb), 100%),
         0 8px 24px rgb(var(--bg-color1-rgb), 95%),
@@ -38,8 +38,8 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 110, 110, 90;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(47 95 145);
-    --accent2: rgb(225 155 97);
+    --accent1: rgb(60 120 180);
+    --accent2: rgb(225 155 100);
     --box-shadow:
         0 2px 6px rgb(var(--fg-color1-rgb), 25%),
         0 8px 24px rgb(var(--fg-color1-rgb), 33%),

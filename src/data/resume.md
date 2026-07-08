@@ -19,7 +19,7 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
 
 *Zürich, Switzerland • Nov 2023 – Present*
 
-- Developing **u-center 2 Desktop Application** — a data-intensive Electron.js application used by both customers and the company's R&D team for aggregation and visualization of data sent by company's GPS receivers
+- Developing **u-center 2** — a data-intensive desktop application used by both customers and the company's R&D team for aggregation and visualization of data sent by company's GPS receivers
 - Working across the development stack, including:
   - React, Redux and RxJS on frontend
   - Electron.js architecture as backend of the desktop app
@@ -27,9 +27,9 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
   - Backend logic and infrastructure for microservices
   - E2E tests of the application
 - Heavily focusing on **eliminating performance bottlenecks** for the application to handle thousands of incoming events per second
-- Implemented various features from design to production release, such as **log file playback with filtering controls**
+- Implemented various features from design to production release, such as **log file playback filtering**
 - Lead the adoption of **AI as a first-class tool** in the team, setting up AI Agent Skills and instructions adopted by the team
-- Lead the initiative to **migrate the team's CI pipeline from on-premise to cloud**, heavily improving build time and reducing maintenance overhead
+- Lead the initiative to **migrate the team's CI pipeline from on-premise to cloud**, cutting build time from 11 to 4 minutes and eliminating maintenance overhead
 - Volunteered to **refactor the end-to-end test suite**, improving reliability and coverage
 - Recognized for taking initiatives and **promoted to Senior Software Engineer** in January 2026
 - Migrated features from legacy C++ application to the new codebase
@@ -95,7 +95,7 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
 ## Projects
 
 - Acting as **sysadmin** of my self-hosted **homelab** — my biggest ongoing side project, running services in Proxmox and Linux Containers for smart home automation, media streaming, photo archiving, ad-blocking DNS, VPN and tunneling, automated backups, and monitoring
-- Created a **personal website** [https://radlinski.dev/](https://radlinski.dev/) that is hosted using Cloudflare Pages
+- Created a **personal website** [radlinski.dev](https://radlinski.dev/) that is hosted using Cloudflare Pages
 - Designed in CAD and assembled **custom keyboard** along with its firmware [github/radlinskii/basilisk](https://github.com/radlinskii/basilisk) for ergonomy and efficiency
 - Created **typing test as a CLI program** [github/radlinskii/donkeytype](https://github.com/radlinskii/donkeytype), written in Rust
 
@@ -107,6 +107,10 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
 - Building custom ergonomic mechanical keyboards
 - Ornithology, hiking, swimming
 
+<div class="consent">
+
 ---
 
 *I hereby give consent for my personal data included in my application to be processed for the purposes of recruitment.*
+
+</div>

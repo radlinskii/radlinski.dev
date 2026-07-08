@@ -28,7 +28,7 @@ import { SITE_TITLE, SITE_IMAGE } from "../consts";
             }
 
             .prose {
-                color: var(--fg-color3);
+                color: var(--fg-color2);
             }
 
             @media screen and (width >= 1024px) {
@@ -47,6 +47,22 @@ import { SITE_TITLE, SITE_IMAGE } from "../consts";
             .divider {
                 margin-bottom: 2rem;
             }
+
+            .pdf-download {
+                text-align: left;
+                margin-bottom: 0.5rem;
+            }
+
+            .pdf-download a {
+                color: var(--accent1);
+                font-size: 1rem;
+                text-decoration: none;
+            }
+
+            .pdf-download a:hover {
+                color: var(--accent2);
+                text-decoration: underline;
+            }
         </style>
     </head>
     <body>
@@ -55,6 +71,13 @@ import { SITE_TITLE, SITE_IMAGE } from "../consts";
             <article>
                 <div class="prose">
                     <div class="content">
+                        <Divider />
+                        <div class="pdf-download">
+                            pdf version = <a
+                                href="/downloads/ignacy-radlinski-resume.pdf"
+                                download>/downloads/resume.pdf</a
+                            >
+                        </div>
                         <Divider />
                         <Content />
                     </div>
