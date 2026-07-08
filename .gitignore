@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# generated files
+public/downloads/ignacy-radlinski-resume.pdf
+
 # macOS-specific files
 .DS_Store
 

@@ -11,6 +11,7 @@ import { SITE_NAME } from "../consts";
         </h2>
         <div class="nav-panel">
             <HeaderLink href="/posts">/posts</HeaderLink>
+            <HeaderLink href="/resume" class="resume-link">/resume</HeaderLink>
             <ThemeSelect />
         </div>
     </nav>
@@ -50,6 +51,12 @@ import { SITE_NAME } from "../consts";
 
         .nav-panel {
             gap: 1rem;
+        }
+    }
+
+    @media (width < 720px) {
+        .resume-link {
+            display: none;
         }
     }
 </style>

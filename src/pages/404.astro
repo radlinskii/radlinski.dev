@@ -1,0 +1,58 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Divider from "../components/Divider.astro";
+import { SITE_TITLE, SITE_IMAGE } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`404: Not Found | ${SITE_TITLE}`}
+            siteName={SITE_TITLE}
+            description="This page could not be found."
+            image={SITE_IMAGE}
+        />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="main-container">
+                <div class="text-container">
+                    <h1>&gt;404</h1>
+                    <p>page not found</p>
+                    <Divider />
+                    <p>
+                        home = <a href="/">radlinski.dev/</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .main-container {
+        width: 720px;
+        max-width: calc(100% - 2rem);
+        margin: auto;
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 23px - 82px - 4rem);
+    }
+
+    @media screen and (width >= 1024px) {
+        .main-container {
+            width: 1024px;
+        }
+
+        .text-container {
+            width: 720px;
+        }
+    }
+</style>

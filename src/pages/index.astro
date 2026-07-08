@@ -34,6 +34,10 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
                             href="https://www.linkedin.com/in/ignacy-radlinski"
                             target="_blank"
                             >https://www.linkedin.com/in/ignacy-radlinski</a
+                        ><br />
+                        resume = <a href="/resume">/resume</a>, <a
+                            href="/downloads/ignacy-radlinski-resume.pdf"
+                            download>/downloads/resume.pdf</a
                         >
                     </p>
                     <Divider />
@@ -41,8 +45,8 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
                         If I ever find the time again, I'll add some more <a
                             href="/posts">/posts</a
                         ><br />
-                        ...something about ergonomic keyboards, <br />
-                        my homelab setup, configuring NeoVim,<br />
+                        ...something about my homelab setup,<br />
+                        ergonomic keyboards, configuring NeoVim,<br />
                         or other tools from my development environment,<br />
                         how I built this website or some of my other side projects,<br
                         />
@@ -92,8 +96,8 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
             align-items: center;
             justify-content: center;
 
-            /* 100vh - header height - footer height - padding - some margin */
-            min-height: calc(100vh - 68px - 82px - 4rem - 2px);
+            /* 100vh - header height - footer height - padding */
+            min-height: calc(100vh - 23px - 82px - 4rem);
         }
 
         .text-container {
@@ -101,7 +105,8 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE } from "../consts";
         }
 
         .image-container {
-            width: 400px;
+            width: 440px;
+            padding-top: 80px;
             padding-bottom: 16px;
         }
     }

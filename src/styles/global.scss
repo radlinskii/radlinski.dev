@@ -17,8 +17,8 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 166, 160, 131;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(97 155 225);
-    --accent2: rgb(225 155 97);
+    --accent1: rgb(100 155 225);
+    --accent2: rgb(225 155 100);
     --box-shadow:
         0 2px 6px rgb(var(--bg-color1-rgb), 100%),
         0 8px 24px rgb(var(--bg-color1-rgb), 95%),
@@ -38,8 +38,8 @@
     --fg-color2: rgb(var(--fg-color2-rgb));
     --fg-color3-rgb: 110, 110, 90;
     --fg-color3: rgb(var(--fg-color3-rgb));
-    --accent1: rgb(47 95 145);
-    --accent2: rgb(225 155 97);
+    --accent1: rgb(60 120 180);
+    --accent2: rgb(225 155 100);
     --box-shadow:
         0 2px 6px rgb(var(--fg-color1-rgb), 25%),
         0 8px 24px rgb(var(--fg-color1-rgb), 33%),
@@ -51,16 +51,47 @@
     font-style: normal;
     font-weight: 400;
     src:
-        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf"), local("ttf");
-    font-display: swap;
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Regular.ttf")
+            format("truetype");
+    font-display: optional;
 }
 
 @font-face {
     font-family: IosevkaTermNerdFontPropo;
     font-style: normal;
     font-weight: 700;
-    src: url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf"), local("ttf");
-    font-display: swap;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Bold.ttf")
+            format("truetype");
+    font-display: optional;
+}
+
+@font-face {
+    font-family: IosevkaTermNerdFontPropo;
+    font-style: italic;
+    font-weight: 400;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Italic.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-Italic.ttf")
+            format("truetype");
+    font-display: optional;
+}
+
+@font-face {
+    font-family: IosevkaTermNerdFontPropo;
+    font-style: italic;
+    font-weight: 700;
+    src:
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-BoldItalic.woff2")
+            format("woff2"),
+        url("/fonts/iosevka/IosevkaTermNerdFontPropo-BoldItalic.ttf")
+            format("truetype");
+    font-display: optional;
 }
 
 html,
