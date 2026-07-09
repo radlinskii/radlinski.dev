@@ -12,12 +12,6 @@ Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlin
 
 Senior Software Engineer with 8+ years of experience building and delivering performant, reliable software - from concept to production. Brings a broad systems perspective spanning full-stack web applications, Electron.js desktop architecture, AWS cloud infrastructure, and bare-metal device communication. Passionate about performance, clean architecture, and building tools that people rely on daily.
 
-## Highlights
-
-- **Redesigned a parser data pipeline**, enabling reliable processing of thousands of events per second (10x throughput)
-- **Migrated CI pipeline from on-premises to cloud**, cutting build time from 11 to 4 minutes
-- **Led team-wide adoption of AI as a first-class tool**, introducing Agent skills and instructions used across the team
-
 ---
 
 ## Professional Experience
