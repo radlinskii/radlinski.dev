@@ -8,6 +8,12 @@ heroImage: "/posts/ergonomic-keyboard/mechabasilisk_3.jpeg"
 heroImageAlt: "My Mecha Basilisk ergonomic keyboard"
 ---
 
+---
+
+## Contents
+
+---
+
 ## An unexpected journey
 
 What started as a simple attempt to reduce wrist pain quickly turned into an exploration of how much the keyboard - something we barely think about - shapes comfort, speed, and even joy while typing.

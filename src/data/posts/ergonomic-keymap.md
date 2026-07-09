@@ -8,6 +8,12 @@ heroImage: "/posts/ergonomic-keymap/keymap.jpeg"
 heroImageAlt: "A closer look at code of a keymap definition."
 ---
 
+---
+
+## Contents
+
+---
+
 ## What is a keymap
 
 A *keymap* defines what each key on a keyboard does.

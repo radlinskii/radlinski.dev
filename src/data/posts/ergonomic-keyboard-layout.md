@@ -8,6 +8,11 @@ heroImage: "/posts/ergonomic-keyboard-layout/colemak.jpeg"
 heroImageAlt: "My Iris keyboard with visible letter keys placed in the Colemak layout."
 ---
 
+---
+
+## Contents
+
+---
 
 ## Colemak keyboard layout
 
