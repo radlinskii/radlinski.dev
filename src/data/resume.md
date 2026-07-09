@@ -10,7 +10,11 @@ pubDate: 2026-07-08
 Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlinski.dev](mailto:ignacy@radlinski.dev)\
 [github.com/radlinskii](https://github.com/radlinskii) • [linkedin.com/in/ignacy-radlinski](https://linkedin.com/in/ignacy-radlinski) • [radlinski.dev](https://radlinski.dev)
 
-Senior Software Engineer with 8+ years of experience building and delivering performant, reliable software - from concept to production. Brings a broad systems perspective spanning full-stack web applications, Electron.js desktop architecture, AWS cloud infrastructure, and bare-metal device communication. Passionate about performance, clean architecture, and building tools that people rely on daily.
+<div class="description">
+
+Senior Software Engineer with 8+ years of experience building and delivering performant, reliable software - from concept to production. Brings a broad systems perspective spanning full-stack web applications, desktop software architecture, AWS cloud infrastructure, and bare-metal device communication. Passionate about performance, clean architecture, and building tools that people rely on daily.
+
+</div>
 
 ---
 
@@ -18,7 +22,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 
 ### Senior Software Engineer • u-blox AG
 
-*Zürich, Switzerland • Nov 2023 – Present*
+*Zürich, Switzerland* • *Nov 2023 – Present*
 
 - Developed and maintained **u-center 2** - a data-intensive desktop application used by u-blox customers and internal R&D team for aggregation and visualization of data from the company's GPS receivers
 - Contributed across the entire stack: React/Redux/RxJS frontend, Electron.js desktop backend, low-level device communication, AWS microservices, and E2E automation
@@ -32,33 +36,33 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 
 ### Frontend Software Developer • 20 Minuten / TX Group AG
 
-*Zürich, Switzerland • Dec 2022 – Nov 2023*
+*Zürich, Switzerland* • *Dec 2022 – Nov 2023*
 
 - Developed and maintained web application for (among others) **20 Minuten** - one of the most popular news sites in Switzerland
 - Worked with React.js, Next.js, Node.js and TypeScript
-- Designed the setup for **internationalization of the monorepo** of web applications
+- Designed the setup for **internationalization** of the monorepo of web applications
 - Refactored large portions of legacy code, enabling faster feature delivery and identifying various bugs
 - Prototyped **Generative AI for news coverage**, establishing prompt and data-quality guidelines for the team
 - Volunteered to join Backend Team for 3 months to help meet the deadline of migration of CMS and API
 
 ### Full-stack Software Engineer • Schibsted Products and Technology AB
 
-*Stockholm, Sweden • Oct 2021 – Aug 2022*
+*Stockholm, Sweden* • *Oct 2021 – Aug 2022*
 
 - Developed and maintained web applications and services for **VG** - one of the most popular news sites in Norway
 - Worked with React.js, Next.js, Node.js, TypeScript and AWS
 - Focused on best **monitoring and observability practices** with dashboards and alerting for news-site services
 - Primarily responsible for developing front-end of the service **minmote.no**
-- Served as a buddy during onboarding process of new teammates
+- Served as a mentor during onboarding process of new teammates
 
 ### Full-stack Software Engineer • Schibsted Tech Polska
 
-*Kraków, Poland • Jul 2018 – Sep 2021*
+*Kraków, Poland* • *Jul 2018 – Sep 2021*
 
 - Worked across the technology stack, from client-side React.js, to server-side Node.js, to AWS infrastructure
 - Co-developed current shape of **tek.no’s** and **gott.no’s** web applications
 - Collaborated with business stakeholders and designers to translate product requirements into technical solutions
-- Served as a buddy for an intern, who later got an offer at the company
+- Served as a mentor for an intern, who later got an offer at the company
 
 ---
 
@@ -66,14 +70,14 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 
 ### Master’s in Computer Science
 
-*AGH University of Kraków, Poland • 02/2020 – 09/2021*
+*AGH University of Kraków, Poland* • *02/2020 – 09/2021*
 
 - Thesis topic: **Generating graphics using Neural Networks**
 - GPA: **4.54/5.00**
 
 ### Bachelor’s in Computer Science
 
-*AGH University of Kraków, Poland • 09/2016 – 01/2020*
+*AGH University of Kraków, Poland* • *09/2016 – 01/2020*
 
 - Thesis topic: **Distributed optimization algorithm implemented with WebAssembly**
 - GPA: **4.46/5.00**
@@ -85,7 +89,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 
 - **Advanced in**: JavaScript and TypeScript (Node.js, React.js, Next.js, Electron.js), HTML/CSS, SQL (Postgres)
 - **Familiar with**: Rust, Golang, C++, Java, C, Python, GraphQL
-- **Experienced in**: AWS Cloud, Docker, various CI/CD and App Monitoring services, and AI-assisted development
+- **Tooling and Platforms**: AWS Cloud, Docker, various CI/CD and App Monitoring services, and AI-assisted development
 
 ---
 
