@@ -15,10 +15,10 @@ const pdf = await mdToPdf(
         pdf_options: {
             format: "A4",
             margin: {
-                top: "0.8in",
-                bottom: "0.8in",
-                left: "0.8in",
-                right: "0.8in",
+                top: "0.5in",
+                bottom: "0.5in",
+                left: "0.5in",
+                right: "0.5in",
             },
             printBackground: false,
         },
