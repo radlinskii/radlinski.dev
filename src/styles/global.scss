@@ -175,17 +175,17 @@ h6 {
     font-size: 0.875rem;
 }
 
-.prose :is(h2, h3, h4, h5, h6) {
+.prose :is(h1, h2, h3, h4, h5, h6) {
     position: relative;
     scroll-margin-top: 2rem;
 }
 
-.prose :is(h2, h3, h4, h5, h6) > a {
+.prose :is(h1, h2, h3, h4, h5, h6) > a {
     text-decoration: none;
     color: inherit;
 }
 
-.prose :is(h2, h3, h4, h5, h6) > a::after {
+.prose :is(h1, h2, h3, h4, h5, h6) > a::after {
     content: "#";
     opacity: 0;
     transition: opacity 0.15s;
@@ -194,7 +194,7 @@ h6 {
     margin-left: 0.3em;
 }
 
-.prose :is(h2, h3, h4, h5, h6):hover > a::after {
+.prose :is(h1, h2, h3, h4, h5, h6):hover > a::after {
     opacity: 1;
 }
 
