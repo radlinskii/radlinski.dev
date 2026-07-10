@@ -275,6 +275,7 @@ pre {
 .code-scroll-wrapper {
     padding: 1.5rem;
     overflow-x: auto;
+    margin-right: 2.5rem;
 }
 
 .astro-code {
@@ -300,26 +301,39 @@ pre {
     top: 0.4rem;
     right: 0.4rem;
     opacity: 1;
-    transition: opacity 0.15s ease;
     cursor: pointer;
-    background-color: var(--fg-color3);
-    border: 1px solid rgb(var(--fg-color3-rgb) / 50%);
+    background-color: var(--bg-color2);
+    border: 1px solid var(--fg-color3);
     border-radius: 4px;
     color: var(--bg-color1);
     font-family: inherit;
     font-size: 0.875rem;
-    padding: 2px 8px;
-    line-height: 1.4;
+    padding: 4px 6px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .copy-btn:hover:not(:disabled) {
-    background-color: var(--fg-color1);
+    background-color: var(--bg-color1);
 }
 
 .copy-btn:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
-    background-color: var(--fg-color3);
+    opacity: 0.7;
+    background-color: var(--bg-color2);
+}
+
+.copy-btn .check-icon {
+    display: none;
+}
+
+.copy-btn.copied .copy-icon {
+    display: none;
+}
+
+.copy-btn.copied .check-icon {
+    display: inline;
 }
 
 blockquote {
