@@ -1,7 +1,6 @@
 ---
 import { type CollectionEntry, render, getCollection } from "astro:content";
 import Post from "../../layouts/Post.astro";
-import CodeBlock from "../../components/CodeBlock.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("posts");
@@ -18,5 +17,5 @@ const { Content } = await render(post);
 ---
 
 <Post {...post.data}>
-    <Content components={{ pre: CodeBlock }} />
+    <Content />
 </Post>

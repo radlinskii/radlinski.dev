@@ -168,6 +168,7 @@ h6 {
 
 .prose pre {
     font-size: 0.875rem;
+    border: 1px solid var(--fg-color2);
 }
 
 .prose code {
@@ -260,13 +261,70 @@ code {
     border-radius: 2px;
 }
 
-pre {
-    padding: 1.5rem;
-    border-radius: 8px;
+pre code {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
 }
 
-pre > code {
-    all: unset;
+pre {
+    border-radius: 8px;
+    position: relative;
+}
+
+.code-scroll-wrapper {
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.astro-code {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+}
+
+:root[data-theme="dark"] .astro-code {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+}
+
+.astro-code span {
+    color: var(--shiki-light);
+}
+
+:root[data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark);
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    cursor: pointer;
+    background-color: var(--fg-color3);
+    border: 1px solid rgb(var(--fg-color3-rgb) / 50%);
+    border-radius: 4px;
+    color: var(--bg-color1);
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 2px 8px;
+    line-height: 1.4;
+}
+
+pre:hover .copy-btn,
+.copy-btn:focus-visible {
+    opacity: 1;
+}
+
+.copy-btn:hover:not(:disabled) {
+    background-color: var(--fg-color2)
+}
+
+.copy-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--fg-color3);
 }
 
 blockquote {
