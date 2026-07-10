@@ -299,7 +299,7 @@ pre {
     position: absolute;
     top: 0.4rem;
     right: 0.4rem;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.15s ease;
     cursor: pointer;
     background-color: var(--fg-color3);
@@ -312,13 +312,8 @@ pre {
     line-height: 1.4;
 }
 
-pre:hover .copy-btn,
-.copy-btn:focus-visible {
-    opacity: 1;
-}
-
 .copy-btn:hover:not(:disabled) {
-    background-color: var(--fg-color2)
+    background-color: var(--fg-color1);
 }
 
 .copy-btn:disabled {
