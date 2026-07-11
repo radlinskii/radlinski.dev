@@ -138,3 +138,56 @@ const {
         <Footer />
     </body>
 </html>
+
+<script>
+    function copyText(text: string) {
+        if (navigator.clipboard?.writeText) {
+            return navigator.clipboard.writeText(text);
+        }
+
+        // iOS workaround
+        return new Promise<void>((resolve, reject) => {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+
+            textarea.focus();
+            textarea.select();
+
+            try {
+                const ok = document.execCommand("copy");
+                document.body.removeChild(textarea);
+                ok ? resolve() : reject(new Error("Copy failed"));
+            } catch (err) {
+                document.body.removeChild(textarea);
+                reject(err);
+            }
+        });
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (btn.disabled) return;
+            btn.disabled = true;
+
+            const pre = btn.closest("pre");
+            const code = pre?.querySelector("code");
+            const text = code?.textContent ?? pre?.textContent ?? "";
+
+            copyText(text)
+                .then(() => {
+                    btn.classList.add("copied");
+
+                    setTimeout(() => {
+                        btn.classList.remove("copied");
+                        btn.disabled = false;
+                    }, 2000);
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                });
+        });
+    });
+</script>

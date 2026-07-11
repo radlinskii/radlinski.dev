@@ -16,6 +16,10 @@ There are many "Immich setup" guides on the internet, and there are also many "B
 
 ---
 
+## Contents
+
+---
+
 ## Prerequisites
 
 I'm not running the apps in this guide using Docker. Instead I'm running them as LXC on Proxmox VE (Debian-based) v9.2.3.
@@ -606,7 +610,9 @@ log "All services recovered successfully"
 
 ## Full backup restore procedure
 
-### 1. Download the backup from `backrest` to `/mnt/immich-media/test-backup/`
+### 1. Download the backup from Backrest
+
+Download it to `/mnt/immich-media/test-backup/`
 
 ### 2. After the files are downloaded check the permissions
 
