@@ -24,7 +24,10 @@ export default defineConfig({
             remarkPlugins: [[remarkToc, { heading: "Contents", maxDepth: 3 }]],
             rehypePlugins: [
                 rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: "wrap", test: ["h2", "h3", "h4"] }],
+                [
+                    rehypeAutolinkHeadings,
+                    { behavior: "wrap", test: ["h2", "h3", "h4"] },
+                ],
             ],
         }),
     },
