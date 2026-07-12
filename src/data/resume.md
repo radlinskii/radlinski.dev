@@ -7,7 +7,7 @@ pubDate: 2026-07-08
 
 # Ignacy Radliński
 
-Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlinski.dev](mailto:ignacy@radlinski.dev)\
+Zurich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [radlinski.ignacy@gmail.com](mailto:radlinski.ignacy@gmail.com)\
 [github.com/radlinskii](https://github.com/radlinskii) • [linkedin.com/in/ignacy-radlinski](https://linkedin.com/in/ignacy-radlinski) • [radlinski.dev](https://radlinski.dev)
 
 <div class="description">
@@ -22,7 +22,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 
 ### Senior Software Engineer • u-blox AG
 
-*Zürich, Switzerland* • *Nov 2023 – Present*
+*Zurich, Switzerland* • *Nov 2023 – Present*
 
 - Developed and maintained **u-center 2** - a data-intensive desktop application used by u-blox customers and internal R&D team for aggregation and visualization of data from the company's GPS receivers
 - Contributed across the entire stack: React/Redux/RxJS frontend, Electron.js desktop backend, low-level device communication, AWS microservices, and E2E automation
@@ -34,9 +34,9 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 - Migrated features from a legacy C++ application to the new codebase
 - Recognized for **technical expertise and ownership**, **promoted to Senior Software Engineer** in January 2026
 
-### Frontend Software Developer • 20 Minuten / TX Group AG
+### Software Engineer • 20 Minuten / TX Group AG
 
-*Zürich, Switzerland* • *Dec 2022 – Nov 2023*
+*Zurich, Switzerland* • *Dec 2022 – Nov 2023*
 
 - Developed and maintained web application for (among others) **20 Minuten** - one of the most popular news sites in Switzerland
 - Worked with React.js, Next.js, Node.js and TypeScript
@@ -45,7 +45,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 - Prototyped **Generative AI for news coverage**, establishing prompt and data-quality guidelines for the team
 - Volunteered to join Backend Team for 3 months to help meet the deadline of migration of CMS and API
 
-### Full-stack Software Engineer • Schibsted Products and Technology AB
+### Software Engineer • Schibsted Products and Technology AB
 
 *Stockholm, Sweden* • *Oct 2021 – Aug 2022*
 
@@ -55,33 +55,33 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 - Primarily responsible for developing front-end of the service **minmote.no**
 - Served as a mentor during onboarding process of new teammates
 
-### Full-stack Software Engineer • Schibsted Tech Polska
+### Software Engineer • Schibsted Tech Polska
 
-*Kraków, Poland* • *Jul 2018 – Sep 2021*
+*Cracow, Poland* • *Jul 2018 – Sep 2021*
 
 - Worked across the technology stack, from client-side React.js, to server-side Node.js, to AWS infrastructure
-- Co-developed current shape of **tek.no’s** and **gott.no’s** web applications
-- Collaborated with business stakeholders and designers to translate product requirements into technical solutions
 - Served as a mentor for an intern, who later got an offer at the company
+- Co-developed the web applications for **tek.no** and **gott.no**
+- Collaborated with business stakeholders and designers to translate product requirements into technical solutions
 
 ---
 
 ## Education
 
-### Master’s in Computer Science
+### Master's in Computer Science
 
-*AGH University of Kraków, Poland* • *02/2020 – 09/2021*
+*AGH University of Cracow, Poland* • *02/2020 – 09/2021*
 
 - Thesis topic: **Generating graphics using Neural Networks**
 - GPA: **4.54/5.00**
 
-### Bachelor’s in Computer Science
+### Bachelor's in Computer Science
 
-*AGH University of Kraków, Poland* • *09/2016 – 01/2020*
+*AGH University of Cracow, Poland* • *09/2016 – 01/2020*
 
 - Thesis topic: **Distributed optimization algorithm implemented with WebAssembly**
 - GPA: **4.46/5.00**
-- Received the **Rector’s scholarship for academic performance** in the 2018/19 academic year, awarded to 10% of students with the highest GPA.
+- Received the **Rector's scholarship for academic performance** in the 2018/19 academic year, awarded to 10% of students with the highest GPA.
 
 ---
 
@@ -96,7 +96,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 ## Projects
 
 - Acting as **sysadmin** of my self-hosted **homelab** - my biggest ongoing side project, running services in Proxmox and Linux Containers for smart home automation, media streaming, photo archiving, ad-blocking DNS, VPN and tunneling, automated backups, and monitoring
-- Created a **personal website** [radlinski.dev](https://radlinski.dev/) that is hosted using Cloudflare Pages
+- Created a **personal website** [radlinski.dev](https://radlinski.dev/) using Astro, with blog written in Markdown/MDX and resume page with automated export to PDF format
 - Designed in CAD and assembled **custom keyboard** along with its firmware [github/radlinskii/basilisk](https://github.com/radlinskii/basilisk) for ergonomy and efficiency
 - Created **typing test as a CLI program** [github/radlinskii/donkeytype](https://github.com/radlinskii/donkeytype), written in Rust
 
