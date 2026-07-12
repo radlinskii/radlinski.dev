@@ -7,7 +7,7 @@ pubDate: 2026-07-08
 
 # Ignacy Radliński
 
-Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [ignacy@radlinski.dev](mailto:ignacy@radlinski.dev)\
+Zürich, Switzerland • +41 78 233 18 45 • +48 698 091 912 • [radlinski.ignacy@gmail.com](mailto:radlinski.ignacy@gmail.com)\
 [github.com/radlinskii](https://github.com/radlinskii) • [linkedin.com/in/ignacy-radlinski](https://linkedin.com/in/ignacy-radlinski) • [radlinski.dev](https://radlinski.dev)
 
 <div class="description">
