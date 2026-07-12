@@ -33,7 +33,7 @@ p {
 }
 
 .description p {
-    margin: 0.08in 0 0.08in;
+    margin: 0.08in 0;
 }
 
 a {
@@ -93,7 +93,7 @@ img {
 
 .consent {
     /* TODO: would be nice to not have it hardcoded, but still have consent at the bottom of last page */
-    margin-top: 3.4in;
+    margin-top: 3.2in;
     text-align: center;
 }
 
