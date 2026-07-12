@@ -1,4 +1,5 @@
 {
+    "ignoreFiles": ["dist/**", "_dist/**", ".astro/**", "node_modules/**"],
     "extends": [
         "stylelint-config-standard",
         "stylelint-config-standard-scss",
