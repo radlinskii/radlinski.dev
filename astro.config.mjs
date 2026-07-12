@@ -5,6 +5,7 @@ import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
 import sitemap from "@astrojs/sitemap";
 import { myCopyButtonTransformer } from "./src/shiki-transformers/my-copy-button";
 
@@ -23,6 +24,13 @@ export default defineConfig({
         processor: unified({
             remarkPlugins: [[remarkToc, { heading: "Contents", maxDepth: 3 }]],
             rehypePlugins: [
+                [
+                    rehypeExternalLinks,
+                    {
+                        target: "_blank",
+                        rel: ["noopener", "noreferrer"],
+                    },
+                ],
                 rehypeSlug,
                 [
                     rehypeAutolinkHeadings,
