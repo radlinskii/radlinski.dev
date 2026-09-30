@@ -50,7 +50,7 @@ Senior Software Engineer with 8+ years of experience building and delivering per
 *Stockholm, Sweden* • *Oct 2021 – Aug 2022*
 
 - Developed and maintained web applications and services for **VG** - one of the most popular news sites in Norway
-- Worked with React.js, Next.js, Node.js, TypeScript and AWS
+- Worked with React.js, Next.js, Node.js, TypeScript, AWS and GraphQL
 - Focused on best **monitoring and observability practices** with dashboards and alerting for news-site services
 - Primarily responsible for developing front-end of the service **minmote.no**
 - Served as a mentor during onboarding process of new teammates
